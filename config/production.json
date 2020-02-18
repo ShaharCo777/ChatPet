@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://shaharco111:shaharco111@cluster0-zfcns.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "BonRules"
+    }
