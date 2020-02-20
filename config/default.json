@@ -1,4 +1,10 @@
 {
+<<<<<<< HEAD
 "mongoURI": "mongodb+srv://shaharco111:shaharco111@cluster0-zfcns.mongodb.net/test?retryWrites=true&w=majority",
 "jwtSecret": "BonRules"
 }
+=======
+"mongoURI": "mongodb+srv://<user name><password>@cluster0-zfcns.mongodb.net/test?retryWrites=true&w=majority",
+"jwtSecret": "<secret>"
+}
+>>>>>>> c3473cf2d2cf4b5e44c4ee94b2327347c9f48f63
