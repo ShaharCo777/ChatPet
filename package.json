@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "social pet network",
   "main": "server.js",
+  "engines": {
+    "node": "12.13.0"
+  },
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
