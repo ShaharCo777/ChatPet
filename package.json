@@ -21,11 +21,20 @@
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.5",
+    "nodeman": "^1.1.2",
     "request": "^2.88.0",
     "save": "^2.4.0"
   },
   "devDependencies": {
     "concurrently": "^5.0.2",
     "nodemon": "^2.0.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShaharCo777/ChatPet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ShaharCo777/ChatPet/issues"
+  },
+  "homepage": "https://github.com/ShaharCo777/ChatPet#readme"
 }
