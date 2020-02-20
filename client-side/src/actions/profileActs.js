@@ -20,7 +20,7 @@ export const createProfile = (FormData, history, edit = false) => async dispatch
           }
         }
 
-      const res = await axios.post('http://localhost:5000/api/profile/me', FormData, config)
+      const res = await axios.post('/api/profile/me', FormData, config)
 
       dispatch({
           type: GET_PROFILE,
@@ -55,7 +55,7 @@ export const createProfile = (FormData, history, edit = false) => async dispatch
 //get user profile
 export const getUserProfile = () => async dispatch => {
 try{
-  const res = await axios.get('http://localhost:5000/api/profile/me')
+  const res = await axios.get('/api/profile/me')
   console.log(res.data)
     dispatch({
         type: GET_PROFILE,
@@ -78,7 +78,7 @@ try{
 export const getProfiles = () => async dispatch => {
       dispatch({type: CLEAR_PROFILE})
       try{
-        const res = await axios.get('http://localhost:5000/api/profile')
+        const res = await axios.get('/api/profile')
       
           dispatch({
               type: GET_PROFILES,
@@ -99,7 +99,7 @@ export const getProfiles = () => async dispatch => {
 // get profile by id
 export const getProfileById = userId => async dispatch => {
   try{
-    const res = await axios.get(`http://localhost:5000/api/profile/user/${userId}`)
+    const res = await axios.get(`/api/profile/user/${userId}`)
   
       dispatch({
           type: GET_PROFILE,
@@ -133,8 +133,7 @@ export const createPictureProfile = (image, history) => async dispatch => {
         const data = {
             profileImage: image
         }
-        const res = await axios.post(
-            'http://localhost:5000/api/profile/profilePicture', data, config)
+        const res = await axios.post('/api/profile/profilePicture', data, config)
 
 
             dispatch({
