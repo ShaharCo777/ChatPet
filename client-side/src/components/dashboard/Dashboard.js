@@ -35,8 +35,7 @@ const Dashboard = ({
             <span className='profileImage'>
             <Link to='/profiles/profilePicture/update' >
             <button>Edit</button>
-             <img  src={profile && profile.profileImage ? (
-                 profile.profileImage):(user && user.avatar)}
+             <img  src={user.avatar}
                  alt='profile image' />
              </Link></span> 
              <h1 className='large text-primary'>Home Page</h1>

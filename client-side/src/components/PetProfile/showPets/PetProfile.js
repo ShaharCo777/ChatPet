@@ -1,7 +1,9 @@
 import React, {Fragment, useEffect} from 'react'
 import PropTypes from 'prop-types'
-import { getPetById, getPetPhotos } from '../../../actions/petActs'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
+import { getPetById, getPetPhotos } from '../../../actions/petActs'
+
 import spinner from '../../../img/spinner.gif';
 
 
@@ -24,16 +26,27 @@ useEffect(() => {
 
     return (
         <Fragment>
-        {pet === null || loading ? (
+        {loading ? (
             <img src={spinner} alt='Loading...'/>
             ) : (
         <Fragment>
-            <h1>{pet.name}</h1>
+            <h1>{pet && pet.name}</h1>
+            {photos && photos.length > 0 ? (
+            <Fragment>
+            <span className='profileImage'>
+            <Link to='/pets/profilePicture/update' >
+            <button>Edit</button>
+             <img  src={pet.profileImage ? (
+                 pet.profileImage
+                ) : (
+                 photos[0].src)}
+                 alt='profile image' />
+             </Link></span> 
             <div>
-            {photos.length > 0 && photos.map( photo =>
+            {photos.map( photo =>
                 <span className='petImage'>
                 <img src = {photo.src} alt='pet images'/></span>)}
-                </div>
+                </div></Fragment>) : (null)}
         </Fragment>)}
         </Fragment>
     )

@@ -12,6 +12,7 @@ import{
 //create or updite pet profile
 export const createPet = (petFormData, history, edit = false) => async dispatch => {
     try {
+      console.log(petFormData)
         const config = {
             headers: {
               'Content-Type': 'application/json'
@@ -59,12 +60,11 @@ export const addPetImages = (image, id)  => async dispatch =>{
         image: image,
         petId: id
         }
-    console.log(data)
 
     try {
         await axios.post('/api/pets/photos', data, config)
       } catch (err) {
-        const errors = err.response.data.errors;
+        const errors = err.response.data.errors
   
         if (errors) {
           errors.forEach(error => setAlert(error.msg, 'danger'))
@@ -77,6 +77,47 @@ export const addPetImages = (image, id)  => async dispatch =>{
             }
         })
       }
+}
+
+//create or updite pet profile picture
+export const createPetProfilePicture = (image, petId, history) => async dispatch => {
+  try {
+    console.log(petId)
+      const config = {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+
+      const data = {
+          profileImage: image
+      }
+      const res = await axios.post(`/api/pets/${petId}/profilePicture`, data, config)
+
+
+          dispatch({
+              type: GET_PET,
+              data: res.data
+          })
+
+      dispatch(setAlert('Profile Picture is set', 'success'))
+
+      history.push('/dashboard')
+} catch (err) {
+      const errors = err.response.data.errors;
+
+      if (errors) {
+        errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+      }
+
+      dispatch({
+          type: PET_ERROR,
+          data: {
+              msg: err.response.statusText,
+              status: err.response.status
+      }
+      })
+  }
 }
 
 

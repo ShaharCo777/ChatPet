@@ -65,7 +65,6 @@ router.post(
   
       const {
         name,
-        profileImage,
         sex,
         type,
         race,
@@ -134,7 +133,29 @@ router.post(
         res.status(500).send('Server Error');
       }
     }
-  );
+  )
+
+
+// @route    POST api/pet/profilePicture
+// @desc     Add photos
+// @access   Private
+  router.post('/:id/profilePicture', [
+    midAuth,
+],
+async(req, res) => {
+
+ const profileImage =req.body.profileImage
+try{
+pet = await Pets.findById(req.params.id)
+pet.profileImage =profileImage
+await pet.save()
+res.json(pet)
+} catch (err){
+    console.error(err.message)
+    res.status(500).send('Server eror')
+    
+}
+})
 
   // @route      get api/pets
 // @goal       get all user pets

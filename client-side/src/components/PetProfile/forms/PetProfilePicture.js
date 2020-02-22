@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import { withRouter, Link} from 'react-router-dom'
 
-import {createPictureProfile} from '../../../actions/profileActs'
+import {createPetProfilePicture} from '../../../actions/petActs'
 
 import Cropper from 'react-easy-crop'
 import getCroppedImg from '../../imageSetting/cropImage'
@@ -11,12 +11,13 @@ import spinner from '../../../img/spinner.gif'
 import Dropzone from '../../imageSetting/Dropezone'
 
 
-const ProfilePicture = ({
-    auth: {
-      user,
-    loading
+const PetProfilePicture = ({
+    pet: {
+      pet,
+      photos,
+      loading
   },
-    createPictureProfile,
+  createPetProfilePicture,
      history}) => {
     const [image, setImage] = useState('')
     const [crop, setCrop] = useState({ x: 0, y: 0 })
@@ -52,7 +53,7 @@ const ProfilePicture = ({
                 croppedAreaPixels,
                 rotation
         )
-        createPictureProfile(croppedImage , history)
+        createPetProfilePicture(croppedImage, pet._id, history)
         }
                 
 
@@ -62,12 +63,15 @@ const ProfilePicture = ({
             <img src={spinner} alt='Loading...'
             />  : <Fragment> 
         <form className="form" onSubmit= {e => sentData(e)}>         
-      <h1 className='large text-primary'>Set a profile picture</h1>
+      <h1 className='large text-primary'>Set a profile picture for your pet</h1>
       <span className='currentProfile'>
-        <h6>Your current profile picture</h6>
-             <img  src={user.avatar}
-                 alt='profile image' />
-      </span>
+        <h6>{pet.name} current profile picture</h6>
+        <img  src={pet.profileImage ? (
+                 pet.profileImage
+                ) : ( 
+                photos && photos.length > 0 && photos[0].src)}
+                alt='profile image' />
+      </span> 
       {image? (
       <div> <strong>
             *use the sliderss for edit
@@ -126,13 +130,13 @@ const ProfilePicture = ({
      }
 
 const mapStateToProps = state => ({
-      auth: state.auth
+      pet: state.pets
 })
 
-ProfilePicture.propTypes = {
-    createPictureProfile: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+PetProfilePicture.propTypes = {
+    createPetProfilePicture: PropTypes.func.isRequired,
+    pet: PropTypes.object.isRequired
 }
 
 export default connect(mapStateToProps,
-    {createPictureProfile}) (withRouter(ProfilePicture))
+    {createPetProfilePicture}) (withRouter(PetProfilePicture))

@@ -2,6 +2,7 @@ import {
     REGISTER_SUCCESS,
     USER_LOADED,
     LOGIN_SUCCESS,
+    UPDATE_PROFILE_USER,
     LOGOUT,
     ACCOUNT_DELETED,
     REGISTER_FAIL,
@@ -41,6 +42,7 @@ export default function(state = initialState, action){
                 isAuthenticated: false,
                 loading: false
             }
+        case  UPDATE_PROFILE_USER:
         case USER_LOADED:
             return{
                 ...state,

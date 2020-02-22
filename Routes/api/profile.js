@@ -120,6 +120,33 @@ try{
 
 })
 
+
+// @route   post /api/profile/profilrPicture
+// @goal    creat profile picture
+// @access   public
+
+
+router.post('/profilePicture', [
+    midAuth,
+],
+async(req, res) => {
+
+ const profileImage =req.body.profileImage
+
+try{
+    const user = await User.findById(req.user.id)
+        user.avatar = profileImage
+        user.save()
+        return res.json(user)
+
+} catch (err){
+    console.error(err.message)
+    res.status(500).send('Server eror')
+    
+}
+})
+
+
 router.delete('/me', midAuth, async (req, res) => {
     try {
       // Remove user posts
@@ -136,34 +163,6 @@ router.delete('/me', midAuth, async (req, res) => {
       res.status(500).send('Server Error');
     }
 })
-
-
-// @route   post api/profile
-// @goal    creat profile picture
-// @access   public
-
-
-router.post('/profilePicture', [
-    midAuth,
-],
-async(req, res) => {
-
- const profileImage =req.body
-
-try{
-    await Profile.findOneAndUpdate(
-        { user: req.user.id},
-        {$set: profileImage},
-        {new: true, upsert: true})
-        return res.json(profile)
-
-} catch (err){
-    console.error(err.message)
-    res.status(500).send('Server eror')
-    
-}
-})
-
 
 
 // @route   get api/profile

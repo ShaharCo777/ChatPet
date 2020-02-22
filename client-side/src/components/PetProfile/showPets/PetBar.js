@@ -6,7 +6,6 @@ import PetItem from './PetItem'
 const PetBar = ({
         pets
 }) => {
-     console.log(pets)   
     return (
         <div className='petBar'>
         <Grid container spacing={2}>

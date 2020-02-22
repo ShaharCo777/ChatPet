@@ -5,6 +5,7 @@ import{
     CLEAR_PROFILE,
     GET_PROFILE,
     GET_PROFILES,
+    UPDATE_PROFILE_USER,
     PROFILE_ERROR,
     ACCOUNT_DELETED
   } from './consts'
@@ -56,7 +57,6 @@ export const createProfile = (FormData, history, edit = false) => async dispatch
 export const getUserProfile = () => async dispatch => {
 try{
   const res = await axios.get('/api/profile/me')
-  console.log(res.data)
     dispatch({
         type: GET_PROFILE,
         data: res.data
@@ -119,10 +119,6 @@ export const getProfileById = userId => async dispatch => {
 
 //create or updite profile picture
 export const createPictureProfile = (image, history) => async dispatch => {
-    if(!image){
-        dispatch(setAlert('You should upload a photo, or click "skip"', 'danger'))
-    }
-    else{
     try {
         const config = {
             headers: {
@@ -137,7 +133,7 @@ export const createPictureProfile = (image, history) => async dispatch => {
 
 
             dispatch({
-                type: GET_PROFILE,
+                type: UPDATE_PROFILE_USER,
                 data: res.data
             })
 
@@ -159,7 +155,7 @@ export const createPictureProfile = (image, history) => async dispatch => {
         }
         })
     }
-}}
+}
 
 
 // Delete account & profile

@@ -38,7 +38,7 @@ export default function(state = initialState, action){
                 return{
                     ...state,
                     photos: data
-                }
+            }
         case PET_ERROR:
             return {
                 ...state,

@@ -14,7 +14,6 @@ import Grid from '@material-ui/core/Grid'
 const CreatePetProfile = ({createPet, history}) => {
   const [images, setImages] = useState([])  
   const [petFormData, setPetFormData] = useState({
-      profileImage:'',
       name:'',
       sex:'',
       type:'',
@@ -40,7 +39,6 @@ const CreatePetProfile = ({createPet, history}) => {
        src: await getBase64(e[0])
       }
       ])
-    if(images[0]) setPetFormData({...petFormData, profileImage: images[0].src})
   }
 
     const onChange = e =>{
