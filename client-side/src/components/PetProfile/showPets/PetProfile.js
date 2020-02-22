@@ -26,22 +26,23 @@ useEffect(() => {
 
     return (
         <Fragment>
-        {loading ? (
+        {pet === null ? (
             <img src={spinner} alt='Loading...'/>
             ) : (
         <Fragment>
-            <h1>{pet && pet.name}</h1>
-            {photos && photos.length > 0 ? (
-            <Fragment>
             <span className='profileImage'>
             <Link to='/pets/profilePicture/update' >
             <button>Edit</button>
              <img  src={pet.profileImage ? (
                  pet.profileImage
                 ) : (
-                 photos[0].src)}
+                 photos && photos[0].src)}
                  alt='profile image' />
              </Link></span> 
+            <h1>{pet && pet.name}</h1>
+            {photos && photos.length > 0 ? (
+            <Fragment>
+            
             <div>
             {photos.map( photo =>
                 <span className='petImage'>

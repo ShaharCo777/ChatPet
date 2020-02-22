@@ -154,8 +154,8 @@ export const getPetPhotos = petId => async dispatch => {
       dispatch({
           type: PET_ERROR,
           data: {
-              msg: err.response.statusText,
-              status: err.response.status
+              msg: err,
+              status: err
       }
       })
     }

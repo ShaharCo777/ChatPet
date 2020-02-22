@@ -22,4 +22,3 @@ pets: PropTypes.object.isRequired
 }
 
 export default PetBar
-

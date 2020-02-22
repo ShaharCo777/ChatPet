@@ -82,7 +82,6 @@ router.post(
         let pet = new Pet({ 
             user,
             name,
-            profileImage,
             sex,
             type,
             race,
