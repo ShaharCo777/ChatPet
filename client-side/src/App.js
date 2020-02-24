@@ -17,6 +17,7 @@ import Profile from './components/profile/showProfiles/profilePage/Profile'
 
 //pets
 import CreatePetProfile from './components/PetProfile/forms/CreatePetProfile'
+import EditPetProfile from './components/PetProfile/forms/EditPetProfile'
 import PetProfile from './components/PetProfile/showPets/PetProfile'
 import PetProfilePicture from './components/PetProfile/forms/PetProfilePicture'
 
@@ -69,6 +70,7 @@ return(
 
     {/* pet setting */}
     <PrivateRoute exact path='/pets/new' component={CreatePetProfile}/>  
+    <PrivateRoute exact path='/pets/edit/:petId' component={EditPetProfile}/>  
     <PrivateRoute exact path='/pets/profilePicture/update' component={PetProfilePicture}/>  
 
     {/* pet show */}

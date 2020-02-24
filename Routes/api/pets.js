@@ -92,10 +92,6 @@ router.post(
             cost
         })
         await pet.save()
-        await Profile.findOneAndUpdate(
-          { user: req.user.id},
-          {$addToSet: {pets: pet.id}},
-          {new: true, upsert: true})
        res.json(pet)
       } catch (err) {
         console.error(err.message)
@@ -139,7 +135,7 @@ router.post(
 // @route    POST api/pet/:petId/profilePicture
 // @desc     Add photos
 // @access   Private
-  router.post('/:PetId/profilePicture', [
+  router.post('/:petId/profilePicture', [
     midAuth,
 ],
 async(req, res) => {

@@ -4,9 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import { getPetById, getPetPhotos, deletePet } from '../../../actions/petActs'
 
-import spinner from '../../../img/spinner.gif';
-
-
+import spinner from '../../../img/spinner.gif'
 
 function PetProfile({
     getPetById,
@@ -33,22 +31,31 @@ useEffect(() => {
             ) : (
             
         <Fragment>
+            <div>
             <span className='profileImage'>
             <Link to='/pets/profilePicture/update' >
             <button>Edit</button>
-             <img  src={pet && pet.profileImage}
+            <img  src={pet && pet.profileImage}
                  alt='profile image' />
-             </Link></span> 
-            <h1>{pet && pet.name}'s Page</h1>
-            {photos && photos.length > 0 ? (
+            </Link>
+            </span>
+            <h1 className='petName'>
+                 {pet && pet.name}'s Page
+            </h1></div>
+            <div>{pet && pet.descreption}</div>
+            {/* {photos && photos.length > 0 ? (
             <Fragment>
             
             <div>
             {photos.map( photo =>
                 <span className='petImage'>
                 <img src = {photo.src} alt='pet images'/></span>)}
-                </div></Fragment>) : (null)}
+                </div></Fragment>) : (null)} */}
         </Fragment>)}
+        <div className='dash-buttons'>
+            <Link to={`/pets/edit/${match.params.petId}`} className= 'btn btn-light'>
+              <i className='fas fa-user-circle text-primary'/>  Edit Profile
+            </Link> </div>
         <button className='btn btn-danger' onClick={() =>
                      deletePet(match.params.petId, history)}>
                      Delete {pet && pet.name}'s page

@@ -113,7 +113,7 @@ const CreatePetProfile = ({createPet, history}) => {
         >Sorry, we cant afford more then 9 pics for a pet..</h3>)}
         <div className="form-group">
           <textarea placeholder="Add More Info.." 
-          name="general" onChange={(e) => onChange(e)}/>
+          name="descreption" onChange={(e) => onChange(e)}/>
           <small className="form-text">Add what ever you want</small>
         </div>
         <input type="submit" className="btn btn-primary my-1" />
