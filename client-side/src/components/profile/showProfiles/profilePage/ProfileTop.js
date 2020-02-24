@@ -1,20 +1,37 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-
 const ProfileTop = ({
   profile: {
-    profileImage,
     location,
     social,
     user: { name, avatar }
-  }
+  },
+  pets
 }) => {
   return (
     <div className='profile-top bg-primary p-2'>
-      <img className='round-img my-1' src={profileImage} alt='' />
+      <img className='round-img my-1' src={avatar} alt='' />
       <h1 className='large'>{name}</h1>
-      <p>{location && <span>{location.contry}</span>}</p>
+      {/* <div>
+            {pets.length > 0 ? (
+            pets.map(pet => (
+              <span className=''>
+             <img  src={pet.profileImage} className='' alt='prodile pet image'/>
+                  <h3>{pet.name}
+                  {pet.sex === 'male' ? (
+                  <i className='fas fa-mars fa-lg'></i>
+                  ) : (pet.sex === 'female' ? (
+                      <i className='fas fa-venus fa-lg'></i>
+                  ) : (
+                      <i className='fas fa-neuter fa-lg'></i>
+                  )
+                  )}</h3>
+                  </span>
+            ))): (null)}
+      </div> */}
+      <p>{location && <span>{location.contry}, {location.city}
+      <br/>{location.street}</span>}</p>
       <div className='icons my-1'>
         {social && social.twitter && (
           <a href={social.twitter} target='_blank' rel='noopener noreferrer'>
@@ -47,7 +64,8 @@ const ProfileTop = ({
 }
 
 ProfileTop.propTypes = {
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  pets: PropTypes.object.isRequired
 }
 
 export default ProfileTop

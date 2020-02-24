@@ -35,7 +35,7 @@ const Navbar = ({auth: { isAuthenticated, loading}, logout}) => {
            </li>
         </ul>
     )
-    
+
     const guestNav =(
     <ul>
        <li>

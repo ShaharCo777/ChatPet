@@ -1,16 +1,18 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
+import PetBar from '../../../PetProfile/showPets/PetBar'
 const ProfileDescription = ({
   profile: {
     general,
     images,
+    pets,
     user: { name }
   }
 }) => (
-  
+
   <div className='profile-about bg-light p-2'>
-    {general && (
+    {/* {general && (
       <Fragment>
         <h2 className='text-primary'>{name.trim().split(' ')[0]}s Bio</h2>
         <p>{general}</p>
@@ -24,7 +26,7 @@ const ProfileDescription = ({
         <img src={image.src}/>
         </div>
       ))}
-    </div>
+    </div> */}
   </div>
 )
 

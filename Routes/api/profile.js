@@ -147,24 +147,6 @@ try{
 })
 
 
-router.delete('/me', midAuth, async (req, res) => {
-    try {
-      // Remove user posts
-      await Post.deleteMany({ user: req.user.id });
-      // Remove user paets (to add later)
-      // Remove profile
-      await Profile.findOneAndRemove({ user: req.user.id });
-      // Remove user
-      await User.findOneAndRemove({ _id: req.user.id });
-  
-      res.json({ msg: 'User deleted' });
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Server Error');
-    }
-})
-
-
 // @route   get api/profile
 // @goal    get all profiles
 // @access   public
@@ -172,7 +154,6 @@ router.delete('/me', midAuth, async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const profiles = await Profile.find().populate('user', ['name', 'avatar'])
-        //אל תשכח להוסיף כאן את החיות אחרי זה (populate)
         res.json(profiles)
     } catch (error) {
         console.error(err.message)
@@ -198,24 +179,21 @@ router.get('/user/:id', async (req, res) => {
     }
 })
 
-
-// @route   delete api/profile
-// @goal    delete a profile and a user
-// @access   private
-
-router.delete('/', midAuth, async (req, res) => {
+router.delete('/me', midAuth, async (req, res) => {
     try {
-        //@todo remove user posts
-
-        
-        await Profile.findOneAndRemove({user: req.user.id})
-        //remoe the profile
-        await User.findOneAndRemove({_id: req.user.id})
-        //remove user
-            res.json({msg: "The user removed successfully" })
-    } catch (error) {
-        console.error(err.message)
-        res.status(500).send('server error')
+      // Remove user posts
+      await Post.deleteMany({ user: req.user.id })
+      // Remove user pets
+      await Pets.deleteMany({ user: req.user.id })
+      // Remove profile
+      await Profile.findOneAndRemove({ user: req.user.id });
+      // Remove user
+      await User.findOneAndRemove({ _id: req.user.id });
+  
+      res.json({ msg: 'User deleted' })
+    } catch (err) {
+      console.error(err.message)
+      res.status(500).send('Server Error')
     }
 })
 

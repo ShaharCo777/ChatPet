@@ -4,24 +4,32 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { getProfileById } from '../../../../actions/profileActs'
+import {getPetsByUserId } from '../../../../actions/petActs'
 
 import spinner from '../../../../img/spinner.gif'
 import ProfileTop from './ProfileTop'
 import ProfileDescription from './ProfileDescription'
+import PetBar from '../../../PetProfile/showPets/PetBar'
 
 const Profile = ({
   getProfileById,
+  getPetsByUserId,
   profile: { 
     profile, 
     loading 
   },
+  pets,
   auth,
   match
 }) => {
   useEffect(() => {
     getProfileById(match.params.id)
-  }, [getProfileById, match.params.id])
-
+    getPetsByUserId(match.params.id)
+  }, [
+    getProfileById,
+    getPetsByUserId,
+    match.params.id
+  ])
   return (
     <Fragment>
       {profile === null || loading ? (
@@ -39,8 +47,9 @@ const Profile = ({
               </Link>
             )}
           <div className='profile-grid my-1'>
-            <ProfileTop profile={profile} />
-            <ProfileDescription profile={profile} /> 
+            <PetBar pets = {pets}/>
+            <ProfileTop profile={profile} pets={pets}/>
+            <ProfileDescription profile={profile} pets={pets}/> 
           </div>
         </Fragment>
       )}
@@ -50,16 +59,19 @@ const Profile = ({
 
 const mapStateToProps = state => ({
   profile: state.profile,
-  auth: state.auth
+  auth: state.auth,
+  pets: state.pets.pets
 })
 
 
 Profile.propTypes = {
   getProfileById: PropTypes.func.isRequired,
+  getPetsByUserId: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
+  pets: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 }
 
 
 export default connect(mapStateToProps,
-{ getProfileById })(Profile)
+{ getProfileById, getPetsByUserId })(Profile)

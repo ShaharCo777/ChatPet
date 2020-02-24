@@ -5,7 +5,6 @@ import {withRouter} from 'react-router-dom'
 
 import {createPet} from '../../../actions/petActs'
 
-
 import Dropzone from '../../imageSetting/Dropezone'
 import PetImage from '../PetImage'
 import Grid from '@material-ui/core/Grid'
@@ -50,7 +49,7 @@ const CreatePetProfile = ({createPet, history}) => {
     const sentData = async e =>{
       e.preventDefault()
       await createPet(petFormData, history)
-    }
+  }
 
 
  return (
@@ -129,4 +128,4 @@ CreatePetProfile.propTypes = {
 }
 
 export default connect(null,
-  {createPet}) (withRouter(CreatePetProfile))
+  {createPet})(withRouter(CreatePetProfile))

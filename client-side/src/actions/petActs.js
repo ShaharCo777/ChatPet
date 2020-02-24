@@ -82,7 +82,6 @@ export const addPetImages = (image, id)  => async dispatch =>{
 //create or updite pet profile picture
 export const createPetProfilePicture = (image, petId, history) => async dispatch => {
   try {
-    console.log(petId)
       const config = {
           headers: {
             'Content-Type': 'application/json'
@@ -145,7 +144,6 @@ export const getPetById = petId => async dispatch => {
 export const getPetPhotos = petId => async dispatch => {
   try{
     const res = await axios.get(`/api/pets/${petId}/photos`)
-      console.log(res.data)
       dispatch({
           type: PET_PHOTOS,
           data: res.data
@@ -164,9 +162,27 @@ export const getPetPhotos = petId => async dispatch => {
 
 // get all the user pets
 export const getUserPets = () => async dispatch => {
-      try{
-        const res = await axios.get('/api/pets')
-      
+  try{
+        const res = await axios.get(`/api/pets`)
+          dispatch({
+              type: GET_PETS,
+              data: res.data
+          })
+      } catch (err){
+          dispatch({
+              type: PET_ERROR,
+              data: {
+                  msg: err.response.statusText,
+                  status: err.response.status
+          }
+          })
+        }
+}
+
+// get all the user pets
+export const getPetsByUserId = userId => async dispatch => {
+  try{
+        const res = await axios.get(`/api/pets/allUserPets/${userId}`)
           dispatch({
               type: GET_PETS,
               data: res.data
@@ -184,7 +200,8 @@ export const getUserPets = () => async dispatch => {
 
 
 //delete pet
-export const deletePet = petId => async dispatch =>{
+export const deletePet = (petId, history) => async dispatch =>{
+  if (window.confirm('Are you sure?')) {
   try {
       await axios.delete(`/api/pets/${petId}`)
 
@@ -192,7 +209,7 @@ export const deletePet = petId => async dispatch =>{
           type: DELETE_PET,
           data: petId
       })
-
+      history.push('/dashboard')
       dispatch(setAlert('Pet Removed', 'success'))
   } catch (err) {
       dispatch({
@@ -202,5 +219,5 @@ export const deletePet = petId => async dispatch =>{
               status: err
           }
       })
-  }
+  }}
 }

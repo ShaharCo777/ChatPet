@@ -12,9 +12,7 @@ const ProfileItem = ({
             name,
             avatar
         }, 
-        location,
-        profileImage
-        
+        location,        
     }
 }) => {
     useEffect(() => {
@@ -23,15 +21,10 @@ const ProfileItem = ({
     return (
         <div className="profile bg-light">
             <h2>{name}</h2>
-            {profileImage && 
-            <img  src={profileImage}/>}
+            <img  src={avatar}/>
             {location &&
             <p className='my-1'>
-                {location.contry}
-                {location.city && 
-                <span>
-                {location.city} 
-               </span>}
+                {location.contry}, {location.city}
             </p>}
             <Link to={`/profile/${_id}`} className='btn btn primary'>
                 View Profile

@@ -5,6 +5,7 @@ const express = require('express'),
       Pets = require("../../models/Pets")
       PetPhotos = require("../../models/PetPhotos")
       User    = require("../../models/User"),
+      tempImage = require("../../client-side/src/img/tempImage.json")
 
 
 
@@ -75,12 +76,12 @@ router.post(
       } = req.body
       
       const user = req.user.id
-
-
+      const profileImage = tempImage.tempPetImage
 
       try {
         let pet = new Pet({ 
             user,
+            profileImage,
             name,
             sex,
             type,
@@ -95,13 +96,13 @@ router.post(
           { user: req.user.id},
           {$addToSet: {pets: pet.id}},
           {new: true, upsert: true})
-       res.json(pet);
+       res.json(pet)
       } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
+        console.error(err.message)
+        res.status(500).send('Server Error')
       }
     }
-  );
+  )
   
 
   
@@ -135,17 +136,17 @@ router.post(
   )
 
 
-// @route    POST api/pet/profilePicture
+// @route    POST api/pet/:petId/profilePicture
 // @desc     Add photos
 // @access   Private
-  router.post('/:id/profilePicture', [
+  router.post('/:PetId/profilePicture', [
     midAuth,
 ],
 async(req, res) => {
 
  const profileImage =req.body.profileImage
 try{
-pet = await Pets.findById(req.params.id)
+pet = await Pets.findById(req.params.petId)
 pet.profileImage =profileImage
 await pet.save()
 res.json(pet)
@@ -156,20 +157,31 @@ res.json(pet)
 }
 })
 
-  // @route      get api/pets
+// @route      get api/pets
 // @goal       get all user pets
 // @access     public Private
-router.get('/',
-[
-  midAuth,
-],
- async (req, res) => {
+router.get('/', midAuth, async (req, res) => {
   try {
-    const pets = await Pets.find({ user: req.user.id})
+    const pets = await Pets.find({user: req.user.id})
     if (!pets) {
       return res.status(400).json({ msg: 'There is not pets  for this user' })
     }
+    res.json(pets)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('Server Error')
+  }
+})
 
+// @route      get api/pets/allUserPets/usrId
+// @goal       get all user pets
+// @access     public Private
+router.get('/allUserPets/:userId', async (req, res) => {
+  try {
+    const pets = await Pets.find({ user: req.params.userId})
+    if (!pets) {
+      return res.status(400).json({ msg: 'There is not pets  for this user' })
+    }
     res.json(pets)
   } catch (err) {
     console.error(err.message)
@@ -183,18 +195,17 @@ router.get('/',
 // @access  private
 router.delete('/:petId', midAuth, async (req, res)=>{
   try {
-      const pet = await Pets.findById(req.params.petId)
-      
+      const pet = await Pets.findById(req.params.petId)      
       //check user
-      if(post.user.toString()!= req.user.id){
+      if(pet.user.toString()!= req.user.id){
           return res.status(401).json({msg: 'you can delete only your on pets'})
       }
-      await pet.remove()
-      res.json({msg: 'pet remooved'})
       if(!pet){
           return res.status(400).json({msg: 'Pet not found'})
       }
-      res.json(pet)
+      await PetPhotos.deleteMany({ pet: req.params.petId })
+      pet.remove()
+      res.json({msg: 'pet remooved'})
   } catch (err) {
       console.error(err.message)
       

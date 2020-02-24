@@ -2,7 +2,7 @@ import React, {Fragment, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import { getPetById, getPetPhotos } from '../../../actions/petActs'
+import { getPetById, getPetPhotos, deletePet } from '../../../actions/petActs'
 
 import spinner from '../../../img/spinner.gif';
 
@@ -11,7 +11,9 @@ import spinner from '../../../img/spinner.gif';
 function PetProfile({
     getPetById,
     getPetPhotos,
+    deletePet,
     match,
+    history,
     pet:{
         pet,
         loading,
@@ -21,25 +23,23 @@ function PetProfile({
 useEffect(() => {
     getPetById(match.params.petId)
     getPetPhotos(match.params.petId)
-    }, [getPetById, getPetPhotos, match.params.petId])
+    }, [getPetById, getPetPhotos, match])
 
 
     return (
         <Fragment>
-        {pet === null ? (
+        {loading && pet === null ? (
             <img src={spinner} alt='Loading...'/>
             ) : (
+            
         <Fragment>
             <span className='profileImage'>
             <Link to='/pets/profilePicture/update' >
             <button>Edit</button>
-             <img  src={pet.profileImage ? (
-                 pet.profileImage
-                ) : (
-                 photos && photos[0].src)}
+             <img  src={pet && pet.profileImage}
                  alt='profile image' />
              </Link></span> 
-            <h1>{pet && pet.name}</h1>
+            <h1>{pet && pet.name}'s Page</h1>
             {photos && photos.length > 0 ? (
             <Fragment>
             
@@ -49,6 +49,10 @@ useEffect(() => {
                 <img src = {photo.src} alt='pet images'/></span>)}
                 </div></Fragment>) : (null)}
         </Fragment>)}
+        <button className='btn btn-danger' onClick={() =>
+                     deletePet(match.params.petId, history)}>
+                     Delete {pet && pet.name}'s page
+                </button>
         </Fragment>
     )
 }
@@ -60,10 +64,11 @@ const mapStateToProps = state =>({
 PetProfile.propTypes = {
 getPetById: PropTypes.func.isRequired,
 getPetPhotos: PropTypes.func.isRequired,
-pet: PropTypes.object.isRequired,
+deletePet: PropTypes.func.isRequired,
+pet: PropTypes.object.isRequired
 }
 
 export default connect(mapStateToProps,
-    {getPetById,  getPetPhotos}
+    {getPetById,  getPetPhotos, deletePet}
     )(PetProfile)
 
