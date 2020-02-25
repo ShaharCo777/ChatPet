@@ -33,7 +33,6 @@ router.get('/:petId', async (req, res) => {
 router.get('/:petId/photos', async (req, res) => {
   try {
     const photos = await PetPhotos.find({ pet: req.params.petId})
-
     res.json(photos)
   } catch (err) {
     console.error(err.message);
@@ -160,22 +159,22 @@ router.post(
 // @desc     Add photos
 // @access   Private
 router.post(
-    '/photos',
+    '/:petId/photos',
     [
       midAuth,
     ],
     async (req, res) => {
-        const pet = req.body.petId
+        const pet = req.params.petId
         const src = req.body.image.src
         const info = req.body.image.info
       try {
+        console.log(req.body.image)
 
         let petPhoto = new PetPhotos({ 
             pet,
             src,
             info
         })
-
         await petPhoto.save()
         res.send('The image uploaded')
       } catch (err) {

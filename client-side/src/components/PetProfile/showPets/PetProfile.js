@@ -2,9 +2,11 @@ import React, {Fragment, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+
 import { getPetById, getPetPhotos, deletePet } from '../../../actions/petActs'
 
 import spinner from '../../../img/spinner.gif'
+import PetPhotos from './PetPhotos'
 
 function PetProfile({
     getPetById,
@@ -22,7 +24,6 @@ useEffect(() => {
     getPetById(match.params.petId)
     getPetPhotos(match.params.petId)
     }, [getPetById, getPetPhotos, match])
-
 
     return (
         <Fragment>
@@ -60,25 +61,18 @@ useEffect(() => {
                 {pet.type}
                 {pet.race && ` from  a ${pet.race} race`}
             </small> :pet.race && `${pet.name} is from a ${pet.race}`}
-            {pet.age && <small id='petAge'>{pet.age} years old</small>}
+            {pet.age && <p id='petAge'>{pet.age} years old</p>}
             </div>
-            {/* {photos && photos.length > 0 ? (
-            <Fragment>
-            
-            <div>
-            {photos.map( photo =>
-                <span className='petImage'>
-                <img src = {photo.src} alt='pet images'/></span>)}
-                </div></Fragment>) : (null)} */}
-        </Fragment>}
-        <div className='dash-buttons'>
+            <PetPhotos photos={photos} petId={match.params.petId}/>
+            </Fragment>}
+            <div className='dash-buttons'>
             <Link to={`/pets/edit/${match.params.petId}`} className= 'btn btn-light'>
               <i className='fas fa-user-circle text-primary'/>  Edit Profile
             </Link> </div>
-        <button className='btn btn-danger' onClick={() =>
+            <button className='btn btn-danger' onClick={() =>
                      deletePet(match.params.petId, history)}>
                      Delete {pet && pet.name}'s page
-                </button>
+            </button>
         </Fragment>
     )
 }

@@ -85,20 +85,18 @@ export const updatePet = (petFormData, petId, history) => async dispatch => {
 }
 
 //add photos to pet
-export const addPetImages = (image, id)  => async dispatch =>{
-
+export const addPetImages = (image, petId)  => async dispatch =>{
     const config = {
         headers: {
           'Content-Type': 'application/json'
         }
       }
     const data ={
-        image: image,
-        petId: id
+        image: image
         }
 
     try {
-        await axios.post('/api/pets/photos', data, config)
+        await axios.post(`/api/pets/${petId}/photos`, data, config)
       } catch (err) {
         const errors = err.response.data.errors
   

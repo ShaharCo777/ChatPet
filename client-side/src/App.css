@@ -700,11 +700,32 @@ padding-left: 30%;
 margin-right: 10px;
  }
 
-.petImage{
-  width: 40%;
-  height: 40%;
-  float: left;
+.petImage-container{
+  display: grid;
+  overflow:scroll;
+  height: 800px;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: 230px auto auto;
+  grid-gap: 10px 5px;
+  border-style: groove;
+  border-width: 1.5px;
+  border-radius: 5px;
+  background-color: AliceBlue;
+}
 
+.petImage{
+  height: 200px;
+}
+
+.petImage img{
+  border-radius: 5px;
+
+}
+
+.petImage textarea{
+  width: 100%;
+  border-top:none;
+  border-radius: 5px;
 }
 
 .petName{
@@ -713,11 +734,16 @@ margin-right: 10px;
   font-size: 2rem;
   }
 
-.petImage img{
+.petImage-container .petImage img{
 width: 100%;
 height: 100%;
 display: block;
+}
 
+.petImage-container .petImage button{
+width: 100%;
+height: 100%;
+display: block;
 }
 
 .petBar{
@@ -759,7 +785,7 @@ position: absolute;
 }
 
 #petAge{
-margin-left: 225px;
+text-align-last: right;
 }
 
 /* Posts Page */
