@@ -4,14 +4,14 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 
-import {createPet, getPetById} from '../../../actions/petActs'
+import {updatePet, getPetById} from '../../../actions/petActs'
 
 import spinner from '../../../img/spinner.gif'
 
 
 
 const EditPetProfile = ({
-  createPet,
+  updatePet,
   getPetById,
   match,
   history,
@@ -21,7 +21,6 @@ const EditPetProfile = ({
   }
   }) => {
   const [petFormData, setPetFormData] = useState({
-      profileImage:'',
       name:'',
       sex:'',
       type:'',
@@ -48,7 +47,6 @@ const EditPetProfile = ({
 
 
     const  { 
-      profileImage,
       name,
       sex,
       type,
@@ -65,7 +63,7 @@ const EditPetProfile = ({
 
     const sentData = async e =>{
       e.preventDefault()
-      await createPet(petFormData, history)
+      await updatePet(petFormData, pet._id, history)
     }
 
 
@@ -97,6 +95,12 @@ const EditPetProfile = ({
             <option value="female">female</option>
             <option value="other">Other</option>
           </select>
+        </div>
+        <div className="form-group">
+          <input type="text" value={age} placeholder="Pet's Age" 
+          name="age" onChange={(e) => onChange(e)}/>
+          <small className="form-text"
+            >How old is it?</small>
         </div>
         <div className="form-group">
           <input type="text" placeholder="Pet's Type" value={type}
@@ -137,10 +141,10 @@ const mapStateToProps = state => ({
   })
 
 EditPetProfile.propTypes = {
-  createPet: PropTypes.func.isRequired,
+  updatePet: PropTypes.func.isRequired,
   getPetById: PropTypes.func.isRequired
 }
 
 export default connect(
     mapStateToProps,
-  {createPet, getPetById}) (withRouter(EditPetProfile))
+  {updatePet, getPetById}) (withRouter(EditPetProfile))

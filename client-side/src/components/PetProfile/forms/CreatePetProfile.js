@@ -79,6 +79,12 @@ const CreatePetProfile = ({createPet, history}) => {
           </select>
         </div>
         <div className="form-group">
+          <input type="text" placeholder="Pet's Age" 
+          name="age" onChange={(e) => onChange(e)}/>
+          <small className="form-text"
+            >How old is it?</small>
+        </div>
+        <div className="form-group">
           <input type="text" placeholder="Pet's Type" 
           name="type" onChange={(e) => onChange(e)}/>
           <small className="form-text"

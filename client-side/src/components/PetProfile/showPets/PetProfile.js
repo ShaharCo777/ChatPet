@@ -26,23 +26,42 @@ useEffect(() => {
 
     return (
         <Fragment>
-        {loading && pet === null ? (
+        {loading && pet === null ? 
             <img src={spinner} alt='Loading...'/>
-            ) : (
-            
-        <Fragment>
-            <div>
+             : 
+            pet && <Fragment>
+            <div className='petTop'>
             <span className='profileImage'>
             <Link to='/pets/profilePicture/update' >
             <button>Edit</button>
-            <img  src={pet && pet.profileImage}
+            <img  src={pet.profileImage}
                  alt='profile image' />
             </Link>
             </span>
             <h1 className='petName'>
-                 {pet && pet.name}'s Page
-            </h1></div>
-            <div>{pet && pet.descreption}</div>
+                 {pet.name}'s Page
+            </h1>
+            {pet.sex === 'male' ? (
+            <i className='fas fa-mars fa-lg'></i>
+            ) : (pet.sex === 'female' ? (
+                <i className='fas fa-venus fa-lg'></i>
+            ) : (
+                <i className='fas fa-neuter fa-lg'></i>
+            )
+            )}
+            </div>
+            <div className='petDescrption'>
+             {pet.descreption}
+            </div>
+            <div>
+            {pet.type || pet.traind ?
+            <small>
+                {pet.name} is a {pet.traind && 'traind '} 
+                {pet.type}
+                {pet.race && ` from  a ${pet.race} race`}
+            </small> :pet.race && `${pet.name} is from a ${pet.race}`}
+            {pet.age && <small id='petAge'>{pet.age} years old</small>}
+            </div>
             {/* {photos && photos.length > 0 ? (
             <Fragment>
             
@@ -51,7 +70,7 @@ useEffect(() => {
                 <span className='petImage'>
                 <img src = {photo.src} alt='pet images'/></span>)}
                 </div></Fragment>) : (null)} */}
-        </Fragment>)}
+        </Fragment>}
         <div className='dash-buttons'>
             <Link to={`/pets/edit/${match.params.petId}`} className= 'btn btn-light'>
               <i className='fas fa-user-circle text-primary'/>  Edit Profile

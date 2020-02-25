@@ -43,7 +43,7 @@ router.get('/:petId/photos', async (req, res) => {
 
 
 // @route    POST api/pet
-// @desc     Create or update a pet
+// @desc     Create  a pet
 // @access   Private
 router.post(
     '/',
@@ -59,9 +59,9 @@ router.post(
       ]
     ],
     async (req, res) => {
-      const errors = validationResult(req);
+      const errors = validationResult(req)
       if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400).json({ errors: errors.array() })
       }
   
       const {
@@ -101,7 +101,61 @@ router.post(
   )
   
 
-  
+  // @route    POST api/pet
+// @desc     update a pet
+// @access   Private
+router.post(
+  '/:petId',
+  [
+    midAuth,
+    [
+      check('name', 'Name is required')
+        .not()
+        .isEmpty(),
+      check('sex', 'Sex is required')
+        .not()
+        .isEmpty()
+    ]
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const {
+      name,
+      sex,
+      type,
+      race,
+      age,
+      traind,
+      descreption,
+      cost
+    } = req.body
+    
+    try {
+      pet = await Pets.findById(req.params.petId)
+
+      pet.name =name
+      pet.sex = sex
+      if(type) pet.type = type
+      if(race) pet.race = race
+      if(age) pet.age = age
+      if(traind) pet.traind = traind
+      if(descreption) pet.descreption = descreption
+      if(cost) pet.cost = cost
+
+     await pet.save()
+     res.json(pet)
+    } catch (err) {
+      console.error(err.message)
+      res.status(500).send('Server Error')
+    }
+  }
+)
+
+
 // @route    POST api/pet/:petId
 // @desc     Add photos
 // @access   Private
@@ -170,7 +224,7 @@ router.get('/', midAuth, async (req, res) => {
 })
 
 // @route      get api/pets/allUserPets/usrId
-// @goal       get all user pets
+// @goal       get all spesific user pets
 // @access     public Private
 router.get('/allUserPets/:userId', async (req, res) => {
   try {
