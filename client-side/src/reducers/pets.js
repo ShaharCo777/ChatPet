@@ -2,6 +2,7 @@ import {
     GET_PET,
     GET_PETS,
     PET_PHOTOS,
+    ADD_PHOTO,
     CLEAR_PET,
     DELETE_PET,
     PET_ERROR
@@ -34,10 +35,15 @@ export default function(state = initialState, action){
                 pets: data,
                 loading: false 
             }
-            case PET_PHOTOS:
-                return{
-                    ...state,
-                    photos: data
+        case PET_PHOTOS:
+            return{
+                ...state,
+                photos: data
+            }
+        case ADD_PHOTO:
+            return{
+                ...state,
+                photos:[...state.photos, data]
             }
         case PET_ERROR:
             return {

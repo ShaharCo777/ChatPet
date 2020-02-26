@@ -715,7 +715,10 @@ margin-right: 10px;
 
 .petImage{
   height: 200px;
-}
+
+}:hover + .petImage textarea{
+    display: block;
+  }
 
 .petImage img{
   border-radius: 5px;
@@ -723,9 +726,10 @@ margin-right: 10px;
 }
 
 .petImage textarea{
-  width: 100%;
-  border-top:none;
-  border-radius: 5px;
+overflow: hidden;
+width: 100%;
+border-top:none;
+border-radius: 5px;
 }
 
 .petName{

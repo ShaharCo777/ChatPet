@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-
 import Dropzone from '../../imageSetting/Dropezone'
 
 import {addPetImages} from '../../../actions/petActs'
@@ -12,11 +11,12 @@ const PetPhotos = ({
 }) => {
 
 const [newPhoto, setNewPhoto] = useState(false)
-
 const [showPhoto, setShowPhoto] = useState({
     src:'',
     info:''
 })
+
+
 const getBase64 = (image) => {
     return new Promise((resolve,reject) => {
       const reader = new FileReader()
@@ -37,7 +37,7 @@ const getBase64 = (image) => {
 }
 
 return (
-    photos && photos.length > 0 &&
+    photos &&
     <div className= 'petImage-container'>
         {newPhoto ? <Dropzone
         onDrop={(e) => onDrop(e)}  
@@ -45,16 +45,18 @@ return (
         style={'bigDropzone'}/> : 
         showPhoto.src !== '' ?
         (<span className='petImage'>
-        <button onClick= {() =>{addPetImages(showPhoto, petId)}}>
-        <i className='fa fa-plus fa-lg'/>
+        <button onClick= {() =>{addPetImages(showPhoto, petId)
+        setShowPhoto({
+            src:'',
+            info:''
+        })}}>
+            SEND
         </button><textarea>Click here for adding the photo
         </textarea></span>) :
         <span className='petImage'>
-            <button onClick= {() =>{setNewPhoto(!newPhoto)}}>
+        <button onClick= {() =>{setNewPhoto(!newPhoto)}}>
             <i className='fa fa-plus fa-lg'/>
-        </button>
-        <textarea>Click here for uploading a photo
-            </textarea></span>
+        </button></span>
     }
     {showPhoto.src !== '' ? 
         <span className='petImage'>
@@ -66,6 +68,8 @@ return (
         <span className='petImage'>
         <img src = {photo.src} alt='pet images'/>
         <textarea value={photo.info}/>
+        {/* <button>Edit Text</button>
+        <button>Delete</button> */}
         </span>)}
     </div>
 )

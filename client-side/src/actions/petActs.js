@@ -3,6 +3,7 @@ import {setAlert} from './alertAct'
 import{
     GET_PET,
     GET_PETS,
+    ADD_PHOTO,
     PET_PHOTOS,
     DELETE_PET,
     PET_ERROR
@@ -96,18 +97,19 @@ export const addPetImages = (image, petId)  => async dispatch =>{
         }
 
     try {
-        await axios.post(`/api/pets/${petId}/photos`, data, config)
+         const res = await axios.post(`/api/pets/${petId}/photos`, data, config)
+        dispatch({
+          type: ADD_PHOTO,
+          data: data.image
+      })
       } catch (err) {
-        const errors = err.response.data.errors
-  
-        if (errors) {
-          errors.forEach(error => setAlert(error.msg, 'danger'))
-        }
+         setAlert(err, 'danger')
+        
         dispatch({
             type: PET_ERROR,
             data: {
-                msg: err.response.statusText,
-                status: err.response.status
+                msg: err,
+                status: err
             }
         })
       }
