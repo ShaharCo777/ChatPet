@@ -44,8 +44,9 @@ return (
         multiple={false}
         style={'bigDropzone'}/> : 
         showPhoto.src !== '' ?
-        (<span className='petImage'>
-        <button onClick= {() =>{addPetImages(showPhoto, petId)
+        (<span>
+        <button className='btnphoto'
+         onClick= {() =>{addPetImages(showPhoto, petId)
         setShowPhoto({
             src:'',
             info:''
@@ -53,8 +54,8 @@ return (
             SEND
         </button><textarea>Click here for adding the photo
         </textarea></span>) :
-        <span className='petImage'>
-        <button onClick= {() =>{setNewPhoto(!newPhoto)}}>
+        <span>
+        <button className='btnphoto' onClick= {() =>{setNewPhoto(!newPhoto)}}>
             <i className='fa fa-plus fa-lg'/>
         </button></span>
     }
@@ -64,12 +65,12 @@ return (
         <textarea value={showPhoto.info} onChange={(e) => addInfo(e)}/>
         </span> : null
         } 
-    {photos.map( photo =>
+    {photos.map(photo =>
         <span className='petImage'>
         <img src = {photo.src} alt='pet images'/>
         <textarea value={photo.info}/>
-        {/* <button>Edit Text</button>
-        <button>Delete</button> */}
+        <button className='btn-dark'>Edit Text</button>
+        <button className='btn-danger'>Delete</button>
         </span>)}
     </div>
 )

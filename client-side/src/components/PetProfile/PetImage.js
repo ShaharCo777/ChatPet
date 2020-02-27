@@ -26,7 +26,7 @@ const PetImage = ( {
     }
     return (
         <Grid item xs={12} sm={6} lg={4} >
-            <span className='petImage'>
+            <span className='petNewImage'>
             <img  src={src} alt='pet image'/>
             <textarea placeholder="Tell As About The Moment You Took The Photo " 
            onChange={(e) => addInfo(e)}></textarea> 
