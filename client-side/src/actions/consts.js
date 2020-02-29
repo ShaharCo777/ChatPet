@@ -28,6 +28,7 @@ export const GET_PETS = 'GET_PETS'
 export const PET_PHOTOS = 'PET_PHOTOS'
 export const ADD_PHOTO = 'ADD_PHOTO'
 export const DELETE_PET = 'DELETE_PET'
+export const DELETE_PHOTO = 'DELETE_PHOTO'
 export const PET_ERROR = 'PET_ERROR'
 export const CLEAR_PET = 'CLEAR_PET'
 

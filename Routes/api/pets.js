@@ -1,10 +1,11 @@
-const express = require('express'),
-      router  = express.Router(),
-      midAuth = require("../../middleware/midAuth")
+const express = require('express')
+      router  = express.Router()
+      midAuth = require("../../middleware/midAuth"),
+      {check} = require("express-validator/check")
       Profile = require("../../models/Profile")
       Pets = require("../../models/Pets")
       PetPhotos = require("../../models/PetPhotos")
-      User    = require("../../models/User"),
+      User    = require("../../models/User")
       tempImage = require("../../client-side/src/img/tempImage.json")
 
 
@@ -32,7 +33,7 @@ router.get('/:petId', async (req, res) => {
 // @access     public
 router.get('/:petId/photos', async (req, res) => {
   try {
-    const photos = await PetPhotos.find({ pet: req.params.petId})
+    const photos = await PetPhotos.find({ pet: req.params.petId}).sort({date: -1})
     res.json(photos)
   } catch (err) {
     console.error(err.message);
@@ -159,30 +160,29 @@ router.post(
 // @desc     Add photos
 // @access   Private
 router.post(
-    '/:petId/photos',
-    [
-      midAuth,
-    ],
-    async (req, res) => {
-        const pet = req.params.petId
-        const src = req.body.image.src
-        const info = req.body.image.info
-      try {
-        console.log(req.body.image)
-
-        let petPhoto = new PetPhotos({ 
-            pet,
-            src,
-            info
-        })
-        await petPhoto.save()
-        res.send('The image uploaded')
-      } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-      }
+  '/:petId/photos',
+  [
+    midAuth,
+  ],
+  async (req, res) => {
+      const pet = req.params.petId
+      const src = req.body.image.src
+      const info = req.body.image.info
+    try {
+        
+      let petPhoto = new PetPhotos({ 
+          pet,
+          src,
+          info
+      })
+      await petPhoto.save()
+      res.json(petPhoto)
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
     }
-  )
+  }
+)
 
 
 // @route    POST api/pet/:petId/profilePicture
@@ -238,6 +238,34 @@ router.get('/allUserPets/:userId', async (req, res) => {
   }
 })
 
+// @route  put /api/pets/photos/:photoId
+// @goal   edit a pet photo
+// @access  private
+router.put('/photos/:photoId', midAuth, async (req, res)=>{
+  try {
+      petPhoto = await PetPhotos.findById(req.params.photoId)
+
+      petPhoto.info =  req.body.info
+      petPhoto.save()
+      res.json({msg: `pet's photo updated`})
+  } catch (err) {
+      console.error(err.message) 
+      res.status(500).send('Server eror')
+  }
+})
+
+// @route  delete /api/pets/photos/:photoId
+// @goal   delete a pet photo
+// @access  private
+router.delete('/photos/:photoId', midAuth, async (req, res)=>{
+  try {
+      await PetPhotos.findByIdAndRemove(req.params.photoId)      
+      res.json({msg: `pet's photo remooved`})
+  } catch (err) {
+      console.error(err.message) 
+      res.status(500).send('Server eror')
+  }
+})
 
 // @route  delete api/pets/:petIid
 // @goal   delete a post

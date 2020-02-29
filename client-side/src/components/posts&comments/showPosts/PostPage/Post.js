@@ -21,6 +21,7 @@ const Post = ({
   useEffect(() => {
     getPost(match.params.postId)
   }, [getPost, match])
+  
   return loading || post === null ? (
     <img src={spinner} alt='Loading...'/>
     ) : (

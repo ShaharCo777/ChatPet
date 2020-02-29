@@ -6,6 +6,7 @@ import{
     ADD_PHOTO,
     PET_PHOTOS,
     DELETE_PET,
+    DELETE_PHOTO,
     PET_ERROR
   } from './consts'
 
@@ -100,8 +101,9 @@ export const addPetImages = (image, petId)  => async dispatch =>{
          const res = await axios.post(`/api/pets/${petId}/photos`, data, config)
         dispatch({
           type: ADD_PHOTO,
-          data: data.image
+          data: res.data
       })
+      dispatch(setAlert('Photo added', 'success'))
       } catch (err) {
          setAlert(err, 'danger')
         
@@ -155,6 +157,32 @@ export const createPetProfilePicture = (image, petId, history) => async dispatch
   }
 }
 
+//edit info of pet photo
+export const editPetImage = (info, photoId)  => async dispatch =>{
+  const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    const data = {
+      info: info
+    }
+  try {
+    await axios.put(`/api/pets/photos/${photoId}`, data, config)
+
+    dispatch(setAlert('Photo edited', 'success'))
+    } catch (err) {
+       setAlert(err, 'danger')
+      
+      dispatch({
+          type: PET_ERROR,
+          data: {
+              msg: err,
+              status: err
+          }
+      })
+    }
+}
 
 //get user pet profile
 export const getPetById = petId => async dispatch => {
@@ -242,11 +270,33 @@ export const deletePet = (petId, history) => async dispatch =>{
       await axios.delete(`/api/pets/${petId}`)
 
       dispatch({
-          type: DELETE_PET,
+          type: DELETE_PHOTO,
           data: petId
       })
       history.push('/dashboard')
       dispatch(setAlert('Pet Removed', 'success'))
+  } catch (err) {
+      dispatch({
+          type: PET_ERROR,
+          data: { 
+              msg: err,
+              status: err
+          }
+      })
+  }}
+}
+
+//delete pet photo
+export const deletePetPhoto = (photoId) => async dispatch =>{
+  if (window.confirm('Are you sure?')) {
+  try {
+      await axios.delete(`/api/pets/photos/${photoId}`)
+
+      dispatch({
+          type: DELETE_PHOTO,
+          data: photoId
+      })
+      dispatch(setAlert('Pet Photo Removed', 'success'))
   } catch (err) {
       dispatch({
           type: PET_ERROR,

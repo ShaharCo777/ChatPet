@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 const ProfileTop = ({
   profile: {
     location,
+    birthDay,
+    getDataOf,
     social,
     user: { name, avatar }
   },
@@ -11,6 +13,28 @@ const ProfileTop = ({
 }) => {
   return (
     <div className='profile-top bg-primary p-2'>
+      {/* <div className='icons my-1'>
+        {getDataOf && getDataOf.otherProfiles && (
+          <a href={social.twitter} target='_blank' rel='noopener noreferrer'>
+            <i className='fab fa-twitter fa-2x' />
+          </a>
+        )}
+        {getDataOf && getDataOf.foroms && (
+          <a href={social.facebook} target='_blank' rel='noopener noreferrer'>
+            <i className='fab fa-facebook fa-2x' />
+          </a>
+        )}
+        {getDataOf && getDataOf.petForSale && (
+          <a href={social.linkedin} target='_blank' rel='noopener noreferrer'>
+            <i className='fab fa-linkedin fa-2x' />
+          </a>
+        )}
+        {getDataOf && getDataOf.adopters && (
+          <a href={social.youtube} target='_blank' rel='noopener noreferrer'>
+            <i className='fab fa-youtube fa-2x' />
+          </a>
+        )}
+        </div> */}
       <img className='round-img my-1' src={avatar} alt='' />
       <h1 className='large'>{name}</h1>
       {/* <div>
@@ -59,6 +83,7 @@ const ProfileTop = ({
           </a>
         )}
       </div>
+      {birthDay && <small>Born at {birthDay.day}/{birthDay.month}/{birthDay.year}</small>}
     </div>
   )
 }

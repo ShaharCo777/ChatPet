@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+
 import Dropzone from '../../imageSetting/Dropezone'
+import PetPhoto from './PetPhoto'
 
 import {addPetImages} from '../../../actions/petActs'
+
 const PetPhotos = ({
     photos,
     petId,
@@ -11,6 +14,7 @@ const PetPhotos = ({
 }) => {
 
 const [newPhoto, setNewPhoto] = useState(false)
+// const [editText, setEeditText] = useState('')
 const [showPhoto, setShowPhoto] = useState({
     src:'',
     info:''
@@ -35,6 +39,10 @@ const getBase64 = (image) => {
   const addInfo = e =>{
     setShowPhoto({...showPhoto, info: e.target.value})
 }
+
+    // const editInfo = (photo) =>{
+    //     setEeditText(photo.info)
+    // }
 
 return (
     photos &&
@@ -65,20 +73,29 @@ return (
         <textarea value={showPhoto.info} onChange={(e) => addInfo(e)}/>
         </span> : null
         } 
-    {photos.map(photo =>
+    {/* {photos.map(photo =>
         <span className='petImage'>
         <img src = {photo.src} alt='pet images'/>
-        <textarea value={photo.info}/>
-        <button className='btn-dark'>Edit Text</button>
-        <button className='btn-danger'>Delete</button>
-        </span>)}
+        <textarea value={ editText ? 
+            editText : photo.info}/>
+        <button className='btn-dark' onClick={() => 
+            {editInfo(photo)}}>Edit Text</button>
+        <button className='btn-danger' onClick={() => 
+            {deletePetPhoto(photo._id)}}>Delete</button>
+        </span>)} */}
+
+        {
+            photos.map(photo =>
+                <PetPhoto photo={photo}/>
+            )}
     </div>
 )
 }
 
 PetPhotos.propTypes = {
 photos: PropTypes.object.isRequired,
-addPetImages: PropTypes.func.isRequired
+addPetImages: PropTypes.func.isRequired,
+deletePetPhoto: PropTypes.func.isRequired
 }
 
 export default connect(null,

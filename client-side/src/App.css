@@ -627,17 +627,35 @@ padding-left: 30%;
   color: var(--dark-color);
 }
 
+.fa-quote-left{
+  float: left;
+}
+
+.fa-quote-right{
+  float: right;
+}
+
 .profile-about {
   grid-area: about;
   text-align: center;
+  background-color: rgba(255, 229, 198, 0.836);
 }
 
-.profile-about .skills {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+.profile-about .questions {
+  opacity: 0.7;
+  font-size: 3vh;
+  display: block;
+  margin-right: auto;
+  width: 50%;
+  padding: 5px;
 }
+
+/* .profile-about .answers {
+  float: right;
+  align-items: right;
+  justify-content: right;
+  text-align: right;
+} */
 
 .profile-exp {
   grid-area: exp;

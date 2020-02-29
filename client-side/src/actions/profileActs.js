@@ -15,6 +15,7 @@ import{
 //create or updite profile
 export const createProfile = (FormData, history, edit = false) => async dispatch => {
   try {
+    console.log(FormData)
       const config = {
           headers: {
             'Content-Type': 'application/json'

@@ -1,8 +1,8 @@
-const express = require('express'),
-      router  = express.Router(),
-      midAuth    = require("../../middleware/midAuth"),
-      jwt     = require('jsonwebtoken'),
-      config  = require('config'),
+const express = require('express')
+      router  = express.Router()
+      midAuth    = require("../../middleware/midAuth")
+      jwt     = require('jsonwebtoken')
+      config  = require('config')
       bcrypt  = require('bcryptjs')
       User    = require("../../models/User"),
       {check, validationResult} = require("express-validator/check")

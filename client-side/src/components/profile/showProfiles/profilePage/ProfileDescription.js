@@ -2,9 +2,11 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import PetBar from '../../../PetProfile/showPets/PetBar'
+
 const ProfileDescription = ({
   profile: {
-    general,
+    genral,
+    loveToPet,
     images,
     pets,
     user: { name }
@@ -12,15 +14,22 @@ const ProfileDescription = ({
 }) => (
 
   <div className='profile-about bg-light p-2'>
-    {/* {general && (
-      <Fragment>
-        <h2 className='text-primary'>{name.trim().split(' ')[0]}s Bio</h2>
-        <p>{general}</p>
+    {genral && (
+      <span>
+        <i className="fas fa-quote-left"></i><br/>
+        <strong > ~  {genral}  ~  </strong><br/>
+        <i className="fas fa-quote-right"></i>
         <div className='line' />
-      </Fragment>
+      </span>
     )}
-    <h2 className='text-primary'>Skill Set</h2>
-    <div className='skills'>
+    {loveToPet && <Fragment>
+     <h2 className='text-dark'>{name.trim().split(' ')[0]}'s Love to pets</h2>
+     {loveToPet.when && <span><h4><strong className='questions'>"When it started?":</strong>{loveToPet.when}</h4></span> }
+     {loveToPet.how && <span><h4><strong className='questions'>"How it started?":</strong>{loveToPet.how}</h4></span>}
+     {loveToPet.what && <span><h4><strong className='questions'>"What you did with it":</strong>{loveToPet.what}</h4></span>}
+     {loveToPet.favePet && <span><h4><strong className='questions'>"Favorit Pet:"</strong>{loveToPet.favePet}</h4></span>}
+    </Fragment>}
+    {/* <div className='skills'>
       {images && images.map((image, index) => (
         <div key={index} className='p-1'>
         <img src={image.src}/>

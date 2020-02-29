@@ -5,6 +5,7 @@ import {
     ADD_PHOTO,
     CLEAR_PET,
     DELETE_PET,
+    DELETE_PHOTO,
     PET_ERROR
      } from "../actions/consts"
 
@@ -43,7 +44,7 @@ export default function(state = initialState, action){
         case ADD_PHOTO:
             return{
                 ...state,
-                photos:[...state.photos, data]
+                photos:[data, ...state.photos]
             }
         case PET_ERROR:
             return {
@@ -59,6 +60,13 @@ export default function(state = initialState, action){
                 pet: null,
                 photos: null,
                 loading: false
+            }
+        case DELETE_PHOTO:
+            return {
+                ...state,
+                photos: state.photos.filter(photo =>
+                    photo._id !== data),
+               loading: false
             }
         case DELETE_PET:
             return{

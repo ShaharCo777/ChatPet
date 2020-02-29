@@ -41,6 +41,8 @@ const EditProfile = ({
     useEffect(() => {
         getUserProfile()
         setFormData({
+            genral: loading ? '' : profile.genral,
+
             contry: loading ? '' : profile.location.contry,
             city: loading || !profile.location ? '' : profile.location.city,
             street: loading || !profile.location ? '' : profile.location.street,
@@ -59,13 +61,11 @@ const EditProfile = ({
             petForSale: loading || !profile.getDataOf ? false : profile.getDataOf.petForSale,
             adopters:  loading || !profile.getDataOf ? false : profile.getDataOf.adopters,
 
-            genral: loading || !profile.genral ? '' : profile.genral,
-
             youtube: loading || !profile.social ? '' : profile.social.youtube,
             facbook: loading || !profile.social ? '' : profile.social.facbook,
             instagram: loading || !profile.social ? '' : profile.social.instagram
         })
-    }, [loading, getUserProfile, profile])
+    }, [loading, getUserProfile])
     
 
   const  { 
@@ -95,7 +95,6 @@ const EditProfile = ({
       e.preventDefault()
       createProfile(formData, history, true)
     }
-
 
  return (
 
