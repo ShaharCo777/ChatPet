@@ -1,5 +1,8 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
+
+import PetItem from '../../../PetProfile/showPets/PetItem'
+import PetBar from '../../../PetProfile/showPets/PetBar'
 
 const ProfileTop = ({
   profile: {
@@ -13,6 +16,14 @@ const ProfileTop = ({
 }) => {
   return (
     <div className='profile-top bg-primary p-2'>
+      <div className='userPets'>
+        <h3>pets</h3>
+      {pets && pets.map(pet => 
+    <span >
+    <PetItem key={pet._id} pet={pet}/>
+    </span>)}
+    </div>
+    <div className='userProfile'>
       {/* <div className='icons my-1'>
         {getDataOf && getDataOf.otherProfiles && (
           <a href={social.twitter} target='_blank' rel='noopener noreferrer'>
@@ -84,6 +95,12 @@ const ProfileTop = ({
         )}
       </div>
       {birthDay && <small>Born at {birthDay.day}/{birthDay.month}/{birthDay.year}</small>}
+
+    </div>
+    {/* {pets && pets.map(pet => 
+    <span className='userpets'>
+    <PetItem key={pet._id} pet={pet}/>
+    </span>)} */}
     </div>
   )
 }

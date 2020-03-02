@@ -29,13 +29,6 @@ const ProfileDescription = ({
      {loveToPet.what && <span><h4><strong className='questions'>"What you did with it":</strong>{loveToPet.what}</h4></span>}
      {loveToPet.favePet && <span><h4><strong className='questions'>"Favorit Pet:"</strong>{loveToPet.favePet}</h4></span>}
     </Fragment>}
-    {/* <div className='skills'>
-      {images && images.map((image, index) => (
-        <div key={index} className='p-1'>
-        <img src={image.src}/>
-        </div>
-      ))}
-    </div> */}
   </div>
 )
 

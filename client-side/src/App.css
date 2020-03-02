@@ -607,15 +607,50 @@ padding-left: 30%;
 
 .profile-top {
   grid-area: top;
-  display: flex;
+  /* flex-direction: column;
+  align-items: center;
+  justify-content: center; */
+  text-align: center;
+}
+
+/* .userProfile{
+  position: absolute;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+} */
+
+.userPets{
+float:right;
+grid-row-gap: 10px;
+display: grid;
+}
+
+.userPets span{
+margin: 0px 15px;
+width: 0px;
+transition: 0.5s ease-in-out;
+transition: width 0.5s ;
+align-content: right;
+align-items: right;
+/* background-color: var(--primary-color); */
+}
+
+.userPets span:hover{
+  width: 160px;
+  transition: 0.5s ease-in-out;
+  /* opacity: 1;
+  visibility: visible; */
+}
+
+.userPets span .PetItem{
+  background-color: rgb(0, 0, 0);
 }
 
 .profile-top img {
   width: 250px;
+
 }
 
 .profile-top .icons a {
@@ -801,14 +836,15 @@ display: block;
 }
 
 .petBarUnit{
-  background-color: #d9deff;
-  border-style: solid;
-  border-color: Azure;
+  /* background-color: #d9deff; */
+  /* border-style: solid; */
+  /* border-color: Azure; */
+  border: none;
  }
 
 .petBarUnit img{
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   margin-left: 5px;
   margin-top: 5px;
   border-radius: 50%;
@@ -941,7 +977,6 @@ text-align-last: right;
 
   /* Profile Page */
 
-  .profile-top img,
   .profile img {
     width: 200px;
     margin: auto;

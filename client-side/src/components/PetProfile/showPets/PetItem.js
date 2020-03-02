@@ -19,7 +19,7 @@ const PetItem = ({
         getPetById()
     }, [])
     return (
-      <Grid item xs={12} md={6} lg={12} >
+    //   <Grid item xs={12} md={6} lg={12} >
         <div className="petBarUnit hide-xs">
             {profileImage && 
             <img  src={profileImage} className='petBarImage' alt='prodile pet image'/>
@@ -43,7 +43,7 @@ const PetItem = ({
                 View Profile
             </Link>
         </div>
-        </Grid>
+        // </Grid>
 
     )
 }

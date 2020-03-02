@@ -47,7 +47,7 @@ const Profile = ({
               </Link>
             )}
           <div className='profile-grid my-1'>
-            <PetBar pets = {pets}/>
+            {/* <PetBar pets = {pets}/> */}
             <ProfileTop profile={profile} pets={pets}/>
             <ProfileDescription profile={profile} pets={pets}/> 
           </div>
