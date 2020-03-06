@@ -5,7 +5,7 @@ const DashLinks = () => {
     return (
         <div className='dash-buttons'>
             <Link to='/profiles/editProfile' className= 'btn btn-light'>
-              <i className='fas fa-user-circle text-primary'/>  Edit Profile
+            <i className='fas fa-edit text-primary'/>  Edit Profile
             </Link>
 
             <Link to='/pets/new' className= 'btn btn-light'>

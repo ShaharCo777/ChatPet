@@ -47,8 +47,11 @@ const Profile = ({
               </Link>
             )}
           <div className='profile-grid my-1'>
-            {/* <PetBar pets = {pets}/> */}
-            <ProfileTop profile={profile} pets={pets}/>
+          <ProfileTop profile={profile} pets={pets}/>
+          <div className='userPets'>
+          <h4 className='text-dark'>{profile.user.name.trim().split(' ')[0]}'s pets</h4>
+          <PetBar pets={pets}/>
+          </div>
             <ProfileDescription profile={profile} pets={pets}/> 
           </div>
         </Fragment>

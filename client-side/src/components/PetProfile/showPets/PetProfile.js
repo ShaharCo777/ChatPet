@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
@@ -14,12 +14,14 @@ function PetProfile({
     deletePet,
     match,
     history,
+    auth,
     pet:{
         pet,
         loading,
         photos
     }
 }) {
+
 useEffect(() => {
     getPetById(match.params.petId)
     getPetPhotos(match.params.petId)
@@ -28,7 +30,7 @@ useEffect(() => {
     return (
         <Fragment>
         {loading && pet === null ? 
-            <img src={spinner} alt='Loading...'/>
+            (<img src={spinner} alt='Loading...'/>)
              : 
             pet && <Fragment>
             <div className='petTop'>
@@ -63,21 +65,31 @@ useEffect(() => {
             </small> :pet.race && `${pet.name} is from a ${pet.race}`}
             {pet.age && <p id='petAge'>{pet.age} years old</p>}
             </div>
-            <PetPhotos photos={photos} petId={match.params.petId}/>
-            </Fragment>}
+            {auth.isAuthenticated &&
+            auth.loading === false &&
+            auth.user._id === pet.user ? (
+            <Fragment>
+            <PetPhotos photos={photos} petId={match.params.petId} owner={true}/>
             <div className='dash-buttons'>
-            <Link to={`/pets/edit/${match.params.petId}`} className= 'btn btn-light'>
-              <i className='fas fa-user-circle text-primary'/>  Edit Profile
-            </Link> </div>
+            <button className='btn btn-dark'>
+            <Link to={`/pets/edit/${match.params.petId}`}>
+              <i className='fas fa-feather-alt text-primary'/>  Edit Profile
+            </Link>
+            </button>
             <button className='btn btn-danger' onClick={() =>
                      deletePet(match.params.petId, history)}>
-                     Delete {pet && pet.name}'s page
+                     Delete {pet && pet.name}'s Page
             </button>
+            </div> </Fragment> ):(
+            <PetPhotos photos={photos} petId={match.params.petId} owner={false}/>
+            )}
+            </Fragment>}
         </Fragment>
     )
 }
 
 const mapStateToProps = state =>({
+    auth: state.auth,
     pet: state.pets
 })
 
@@ -85,6 +97,7 @@ PetProfile.propTypes = {
 getPetById: PropTypes.func.isRequired,
 getPetPhotos: PropTypes.func.isRequired,
 deletePet: PropTypes.func.isRequired,
+auth: PropTypes.object.isRequired,
 pet: PropTypes.object.isRequired
 }
 

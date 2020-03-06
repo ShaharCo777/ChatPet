@@ -10,6 +10,7 @@ import {addPetImages} from '../../../actions/petActs'
 const PetPhotos = ({
     photos,
     petId,
+    owner,
     addPetImages
 }) => {
 
@@ -47,7 +48,7 @@ const getBase64 = (image) => {
 return (
     photos &&
     <div className= 'petImage-container'>
-        {newPhoto ? <Dropzone
+      { owner && (newPhoto ? <Dropzone
         onDrop={(e) => onDrop(e)}  
         multiple={false}
         style={'bigDropzone'}/> : 
@@ -65,7 +66,7 @@ return (
         <span>
         <button className='btnphoto' onClick= {() =>{setNewPhoto(!newPhoto)}}>
             <i className='fa fa-plus fa-lg'/>
-        </button></span>
+        </button></span>)
     }
     {showPhoto.src !== '' ? 
         <span className='petImage'>
@@ -73,20 +74,9 @@ return (
         <textarea value={showPhoto.info} onChange={(e) => addInfo(e)}/>
         </span> : null
         } 
-    {/* {photos.map(photo =>
-        <span className='petImage'>
-        <img src = {photo.src} alt='pet images'/>
-        <textarea value={ editText ? 
-            editText : photo.info}/>
-        <button className='btn-dark' onClick={() => 
-            {editInfo(photo)}}>Edit Text</button>
-        <button className='btn-danger' onClick={() => 
-            {deletePetPhoto(photo._id)}}>Delete</button>
-        </span>)} */}
-
         {
             photos.map(photo =>
-                <PetPhoto photo={photo}/>
+                <PetPhoto key={photo._id} photo={photo} owner={owner}/>
             )}
     </div>
 )

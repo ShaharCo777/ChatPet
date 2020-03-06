@@ -28,8 +28,8 @@ router.get('/:petId', async (req, res) => {
   })
 
 
-// @route      get api/pet/petId
-// @goal       get spesific pet 
+// @route      get api/pet/:petId/photos
+// @goal       get spesific pet photos
 // @access     public
 router.get('/:petId/photos', async (req, res) => {
   try {

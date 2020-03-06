@@ -103,6 +103,8 @@ export const addPetImages = (image, petId)  => async dispatch =>{
           type: ADD_PHOTO,
           data: res.data
       })
+      console.log(image)
+      console.log(res.data)
       dispatch(setAlert('Photo added', 'success'))
       } catch (err) {
          setAlert(err, 'danger')
@@ -268,12 +270,12 @@ export const deletePet = (petId, history) => async dispatch =>{
   if (window.confirm('Are you sure?')) {
   try {
       await axios.delete(`/api/pets/${petId}`)
-
       dispatch({
-          type: DELETE_PHOTO,
+          type: DELETE_PET,
           data: petId
       })
-      history.push('/dashboard')
+      if(history) history.push('/dashboard')
+      console.log('maybe here')
       dispatch(setAlert('Pet Removed', 'success'))
   } catch (err) {
       dispatch({

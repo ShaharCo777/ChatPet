@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
 import {connect} from 'react-redux'
 
-import {addPetImages} from '../../actions/petActs'
+import {addPetImages} from '../../../actions/petActs'
 
 const PetImage = ( {
             addPetImages,

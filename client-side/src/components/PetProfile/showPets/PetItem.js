@@ -1,8 +1,9 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import { getPetById } from '../../../actions/petActs'
-import Grid from '@material-ui/core/Grid'
+
+import { deletePet } from '../../../actions/petActs'
 
 
 const PetItem = ({
@@ -12,19 +13,17 @@ const PetItem = ({
         name,
         cost,
         sex
-    }        
+    },
+    owner,
+    deletePet 
     
 }) => {
-    useEffect(() => {
-        getPetById()
-    }, [])
     return (
-    //   <Grid item xs={12} md={6} lg={12} >
         <div className="petBarUnit hide-xs">
             {profileImage && 
             <img  src={profileImage} className='petBarImage' alt='prodile pet image'/>
             }
-            <h3>{name}
+            <h2>{name}
             {sex === 'male' ? (
             <i className='fas fa-mars fa-lg'></i>
             ) : (sex === 'female' ? (
@@ -32,24 +31,30 @@ const PetItem = ({
             ) : (
                 <i className='fas fa-neuter fa-lg'></i>
             )
-            )}</h3>
+            )}</h2>
             {cost &&
             <p className='my-1'>
                 <span>
                 {cost} 
                </span>}
             </p>}
-            <Link to={`pet/profile/${_id}`} className='btn btn primary'>
+            <button className='btn btn-light'>
+            <Link to={`/pet/profile/${_id}`}>
                 View Profile
             </Link>
+            </button>
+            {owner && <button className='btn btn-danger' onClick={() =>
+                     deletePet(_id)}>
+                <i className="fas fa-trash-alt"/>Delete
+            </button>}
         </div>
-        // </Grid>
-
     )
 }
 
 PetItem.propTypes = {
   pet: PropTypes.object.isRequired,
+  deletePet: PropTypes.func.isRequired
 }
 
-export default PetItem
+export default connect(null,
+    {deletePet})(PetItem)

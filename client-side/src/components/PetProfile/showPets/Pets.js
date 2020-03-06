@@ -1,8 +1,8 @@
 import React, {Fragment, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+
 import spinner from '../../../img/spinner.gif'
-import {getPets} from '../../../actions/profileActs'
 import ProfileItem from './ProfileItem'
 
 const Profiles = ({getProfiles,

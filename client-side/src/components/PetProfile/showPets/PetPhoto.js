@@ -5,19 +5,20 @@ import {editPetImage, deletePetPhoto} from '../../../actions/petActs'
 
 const PetPhoto = ({
     photo,
+    owner,
     editPetImage,
     deletePetPhoto
 }) => {
-
     const [editText, setEditText] = useState(false)
     const [info, setInfo] = useState(photo.info)
 
     const addInfo = e =>{
         if(editText){
+            console.log('p')
             setInfo(e.target.value)
         }
     }
-
+    
     const sentInfo = () =>{
         editPetImage(info, photo._id)
         setEditText(false)
@@ -25,9 +26,10 @@ const PetPhoto = ({
     return (
         <span className='petImage'>
         <img src = {photo.src} alt='pet images'/>
-        <textarea value={info} onChange={editText ? 
-            (e) => addInfo(e) : null} />
-        {!editText ?
+        <textarea value={info} onChange={editText ? (e) =>
+             addInfo(e) : null} />
+        {owner && 
+        (!editText ?
         <Fragment><button className='btn-dark' onClick={() => 
             setEditText(true)}>Edit Text</button>
         <button className='btn-danger' onClick={() => 
@@ -37,7 +39,7 @@ const PetPhoto = ({
             sentInfo() }>Send</button>
         <button className='btn-warning' onClick={() => 
             setEditText(false) }>Cancel</button>
-            </Fragment>}</span>
+            </Fragment>)}</span>
     
     )}
 

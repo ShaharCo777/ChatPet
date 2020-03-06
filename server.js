@@ -1,7 +1,8 @@
 const express   = require('express'),
       connectDB = require("./config/db"),
       path = require('path'),
-      cors = require('cors')
+      cors = require('cors'),
+      bodyParser = require('body-parser')
 
 
 
@@ -10,10 +11,15 @@ const app = express()
 connectDB()
 
 //Middleware ofbodyParser
-app.use(express.json({extended: false}))
+// app.use(express.json({extended: false}))
+app.use(bodyParser.json({ limit: '50mb', extended: true }))
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
+
+
 
 //fix CROS 
 app.use(cors({'origin': 'http://localhost:3000'}));
+
 
 //Define Routes
 app.use('/api/users', require('./Routes/api/users'))
