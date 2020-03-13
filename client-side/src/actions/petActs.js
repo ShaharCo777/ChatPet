@@ -14,7 +14,6 @@ import{
 //create a pet profile
 export const createPet = (petFormData, history) => async dispatch => {
     try {
-      console.log(petFormData)
         const config = {
             headers: {
               'Content-Type': 'application/json'
@@ -57,8 +56,11 @@ export const updatePet = (petFormData, petId, history) => async dispatch => {
             'Content-Type': 'application/json'
           }
         }
-
-      const res = await axios.post(`/api/pets/${petId}`, petFormData, config)
+        const data = {
+          petId: petId,
+          petNew: petFormData
+        }
+      const res = await axios.put('/api/pets', data, config)
 
        dispatch({
           type: GET_PET,
@@ -94,11 +96,12 @@ export const addPetImages = (image, petId)  => async dispatch =>{
         }
       }
     const data ={
-        image: image
+        image: image,
+        petId: petId
         }
 
     try {
-         const res = await axios.post(`/api/pets/${petId}/photos`, data, config)
+         const res = await axios.post(`/api/pets/photos`, data, config)
         dispatch({
           type: ADD_PHOTO,
           data: res.data
@@ -129,9 +132,10 @@ export const createPetProfilePicture = (image, petId, history) => async dispatch
         }
 
       const data = {
-          profileImage: image
+          profileImage: image,
+          petId: petId
       }
-      const res = await axios.post(`/api/pets/${petId}/profilePicture`, data, config)
+      const res = await axios.post('/api/pets/profilePicture', data, config)
 
 
           dispatch({
@@ -167,10 +171,11 @@ export const editPetImage = (info, photoId)  => async dispatch =>{
       }
     }
     const data = {
-      info: info
+      info: info,
+      photoId: photoId
     }
   try {
-    await axios.put(`/api/pets/photos/${photoId}`, data, config)
+    await axios.put('/api/pets/photos', data, config)
 
     dispatch(setAlert('Photo edited', 'success'))
     } catch (err) {
@@ -189,7 +194,7 @@ export const editPetImage = (info, photoId)  => async dispatch =>{
 //get user pet profile
 export const getPetById = petId => async dispatch => {
   try{
-    const res = await axios.get(`/api/pets/${petId}`)
+    const res = await axios.get(`/api/pets/profile/${petId}`)
   
       dispatch({
           type: GET_PET,
@@ -229,7 +234,7 @@ export const getPetPhotos = petId => async dispatch => {
 // get all the user pets
 export const getUserPets = () => async dispatch => {
   try{
-        const res = await axios.get(`/api/pets`)
+        const res = await axios.get('/api/pets')
           dispatch({
               type: GET_PETS,
               data: res.data
@@ -264,6 +269,23 @@ export const getPetsByUserId = userId => async dispatch => {
         }
 }
 
+export const getPetsForSale = () => async dispatch =>{
+  try{
+    const res = await axios.get('/api/pets/petsForSale')
+    dispatch({
+      type: GET_PETS,
+      data: res.data
+  })
+  } catch(err){
+    dispatch({
+      type: PET_ERROR,
+      data: {
+          msg: err,
+          status: err
+  }
+  })
+  }
+}
 
 //delete pet
 export const deletePet = (petId, history) => async dispatch =>{

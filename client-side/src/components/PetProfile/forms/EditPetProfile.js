@@ -2,7 +2,6 @@ import React, { Fragment, useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-import Grid from '@material-ui/core/Grid'
 
 import {updatePet, getPetById} from '../../../actions/petActs'
 
@@ -20,6 +19,7 @@ const EditPetProfile = ({
     loading
   }
   }) => {
+  const [forSale, setForSale] = useState(false)
   const [petFormData, setPetFormData] = useState({
       name:'',
       sex:'',
@@ -28,7 +28,7 @@ const EditPetProfile = ({
       age:null,
       descreption:'',
       traind:false,
-      cost:''
+      cost:null
     })
 
     useEffect(() => {
@@ -41,8 +41,9 @@ const EditPetProfile = ({
           age: loading || !pet ? null : pet.age,
           descreption: loading || !pet ? '' : pet.descreption,
           traind:  loading || !pet ? false : pet.traind,
-          cost: loading || !pet ? '' : pet.cost
+          cost: loading || !pet ? null : pet.cost
       })
+      if(!loading && pet.cost !== null) setForSale(true)
     }, [getPetById, match])
 
 
@@ -123,6 +124,30 @@ const EditPetProfile = ({
         setPetFormData({...petFormData, traind: !petFormData.traind})}}/>
         <span className="checkmark"></span>
         </label>
+
+        <label className="checkBox">Is Your Pet For Sale?
+        <input type="checkbox"
+         value={forSale}
+         checked={forSale}
+         name='forSale'
+         onChange={() =>{
+        if (forSale) setPetFormData({...petFormData, cost: 0})
+        setForSale(!forSale)}}/>
+        <span className="checkmark"></span>
+        </label>
+
+       {forSale && (<Fragment>
+        <i className="fas fa-dollar-sign"></i>
+        <input type='number'
+        className='numbrInput'
+        name='cost'
+        value={cost}
+        placeholder='In Dollars'
+        onChange={(e) => onChange(e)}/>
+        <small className="form-text"
+        >Please Enter Just Numbers
+        </small></Fragment>) }
+
         <div className="form-group">
           <textarea placeholder="Add More Info.." value={descreption}
           name="descreption" onChange={(e) => onChange(e)}/>

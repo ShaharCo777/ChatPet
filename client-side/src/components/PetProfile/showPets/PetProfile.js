@@ -44,6 +44,8 @@ useEffect(() => {
             <h1 className='petName'>
                  {pet.name}'s Page
             </h1>
+            <span className='icons'>
+            {pet.cost && <i className="fas fa-dollar-sign fa-lg"></i>}
             {pet.sex === 'male' ? (
             <i className='fas fa-mars fa-lg'></i>
             ) : (pet.sex === 'female' ? (
@@ -52,18 +54,17 @@ useEffect(() => {
                 <i className='fas fa-neuter fa-lg'></i>
             )
             )}
+            </span>
             </div>
             <div className='petDescrption'>
              {pet.descreption}
             </div>
-            <div>
-            {pet.type || pet.traind ?
-            <small>
-                {pet.name} is a {pet.traind && 'traind '} 
-                {pet.type}
-                {pet.race && ` from  a ${pet.race} race`}
-            </small> :pet.race && `${pet.name} is from a ${pet.race}`}
-            {pet.age && <p id='petAge'>{pet.age} years old</p>}
+            <div className='petInfo'>
+            {pet.traind && <i className="far fa-check-square" id='traind'> Traind</i>}               
+            {pet.age && <strong>Age: {pet.age}<br/></strong>}
+            {pet.type && <strong>Type: {pet.type}<br/></strong>}
+            {pet.cost && <small id='petCost'>Price: ${pet.cost}</small>}
+            {pet.race && <strong>Race: {pet.race}<br/></strong>}
             </div>
             {auth.isAuthenticated &&
             auth.loading === false &&

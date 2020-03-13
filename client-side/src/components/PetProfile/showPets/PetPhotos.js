@@ -65,7 +65,8 @@ return (
         </textarea></span>) :
         <span>
         <button className='btnphoto' onClick= {() =>{setNewPhoto(!newPhoto)}}>
-            <i className='fa fa-plus fa-lg'/>
+            {/* <i className='fa fa-plus fa-lg'/> */}
+            <i className='fas fa-camera text-primary'/> Add new photo
         </button></span>)
     }
     {showPhoto.src !== '' ? 

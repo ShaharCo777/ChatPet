@@ -17,9 +17,9 @@ const Navbar = ({auth: { isAuthenticated, loading}, logout}) => {
                 </Link>
            </li>
            <li>
-                <Link to='/profiles'>
-                <i className='fas fa-users'></i>
-                <span className='hide-sm'> Profiles</span>
+                <Link to='/saleingPage'>
+                <i className="fas fa-dollar-sign"/>
+                <span className='hide-sm'> Buy/Sell</span>
                 </Link>
            </li>
             <li>

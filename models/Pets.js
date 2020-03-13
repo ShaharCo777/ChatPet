@@ -30,9 +30,9 @@ const PetSchema = new mongoose.Schema({
     },
     descreption:{
         type: String
-    },
+    }, 
     cost:{
-        type: String,
+        type: String
     },
     date: {
         type: Date,

@@ -4,15 +4,14 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 
-
 import {createPet} from '../../../actions/petActs'
 
 import Dropzone from '../../imageSetting/Dropezone'
 import PetImage from './PetImage'
-import PetPhoto from '../showPets/PetPhoto'
 
 const CreatePetProfile = ({createPet, history}) => {
-  const [images, setImages] = useState([])  
+  const [images, setImages] = useState([])
+  const [forSale, setForSale] = useState(false)
   const [petFormData, setPetFormData] = useState({
       name:'',
       sex:'',
@@ -104,6 +103,25 @@ const CreatePetProfile = ({createPet, history}) => {
         setPetFormData({...petFormData, traind: !petFormData.traind})}}/>
         <span className="checkmark"></span>
         </label>
+
+        <label className="checkBox">Is Your Pet For Sale?
+        <input type="checkbox"
+         name='forSale'
+         onChange={() =>{
+        setForSale(!forSale)}}/>
+        <span className="checkmark"></span>
+        </label>
+
+       {forSale && (<Fragment>
+        <i className="fas fa-dollar-sign"></i>
+        <input type='number'
+        className='numbrInput'
+        name='cost'
+        placeholder='In Dollars'
+        onChange={(e) => onChange(e)}/>
+        <small className="form-text"
+        >Please Enter Just Numbers
+        </small></Fragment>)}
 
       <Grid container spacing={3}>
         {images.length > 0 && images.map(image =>(

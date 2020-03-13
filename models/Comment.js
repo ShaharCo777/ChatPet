@@ -5,12 +5,6 @@ const commentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'post'
 },
- name: {
-     type: String
- },
- peofileImage: {
-     type: String
- },
  text: {
     type: String,
     required: true
@@ -25,7 +19,7 @@ const commentSchema = new mongoose.Schema({
 ],
 user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'users'
+    ref: 'user'
 },
  date: {
      type: Date,

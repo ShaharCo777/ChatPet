@@ -36,7 +36,7 @@ const PetItem = ({
             <p className='my-1'>
                 <span>
                 {cost} 
-               </span>}
+               </span>
             </p>}
             <button className='btn btn-light'>
             <Link to={`/pet/profile/${_id}`}>

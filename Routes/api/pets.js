@@ -13,7 +13,7 @@ const express = require('express')
 // @route      get api/pet/petId
 // @goal       get spesific pet 
 // @access     public
-router.get('/:petId', async (req, res) => {
+router.get('/profile/:petId', async (req, res) => {
     try {
       const pet = await Pets.findById(req.params.petId)
       if (!pet) {
@@ -101,18 +101,18 @@ router.post(
   )
   
 
-  // @route    POST api/pet
+  // @route    POST /api/pets
 // @desc     update a pet
 // @access   Private
-router.post(
-  '/:petId',
+router.put(
+  '/',
   [
     midAuth,
     [
-      check('name', 'Name is required')
+      check('petNew.name', 'Name is required')
         .not()
         .isEmpty(),
-      check('sex', 'Sex is required')
+      check('petNew.sex', 'Sex is required')
         .not()
         .isEmpty()
     ]
@@ -122,7 +122,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
+    
     const {
       name,
       sex,
@@ -132,19 +132,18 @@ router.post(
       traind,
       descreption,
       cost
-    } = req.body
+    } = req.body.petNew
     
     try {
-      pet = await Pets.findById(req.params.petId)
-
+      pet = await Pets.findById(req.body.petId)
       pet.name =name
       pet.sex = sex
-      if(type) pet.type = type
-      if(race) pet.race = race
-      if(age) pet.age = age
-      if(traind) pet.traind = traind
-      if(descreption) pet.descreption = descreption
-      if(cost) pet.cost = cost
+      pet.cost = cost
+      pet.traind = traind
+      pet.type = type
+      pet.race = race
+      pet.age = age
+      pet.descreption = descreption
 
      await pet.save()
      res.json(pet)
@@ -156,18 +155,18 @@ router.post(
 )
 
 
-// @route    POST api/pet/:petId
+// @route    POST api/pet/photos
 // @desc     Add photos
 // @access   Private
 router.post(
-  '/:petId/photos',
+  '/photos',
   [
     midAuth,
   ],
   async (req, res) => {
-      const pet = req.params.petId
-      const src = req.body.image.src
-      const info = req.body.image.info
+      const pet = req.body.petId,
+            src = req.body.image.src,
+            info = req.body.image.info
     try {
         
       let petPhoto = new PetPhotos({ 
@@ -185,17 +184,17 @@ router.post(
 )
 
 
-// @route    POST api/pet/:petId/profilePicture
+// @route    POST api/pet/profilePicture
 // @desc     Add photos
 // @access   Private
-  router.post('/:petId/profilePicture', [
+  router.post('/profilePicture', [
     midAuth,
 ],
 async(req, res) => {
 
  const profileImage =req.body.profileImage
 try{
-pet = await Pets.findById(req.params.petId)
+pet = await Pets.findById(req.body.petId)
 pet.profileImage =profileImage
 await pet.save()
 res.json(pet)
@@ -238,12 +237,29 @@ router.get('/allUserPets/:userId', async (req, res) => {
   }
 })
 
-// @route  put /api/pets/photos/:photoId
+// @route      get /api/pets/PetsForSale
+// @goal       get all pets for sale
+// @access     public Private
+router.get("/petsForSale", midAuth, async (req, res) => {
+  console.log('p')
+  try {
+    const pets = await Pets.find( { cost: { $gte: 0 } } )
+    if (!pets) {
+      return res.status(400).json({ msg: 'There is not pets  for this user' })
+    }
+    res.json(pets)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('Server Error')
+  }
+})
+
+// @route  put /api/pets/photos
 // @goal   edit a pet photo
 // @access  private
-router.put('/photos/:photoId', midAuth, async (req, res)=>{
+router.put('/photos', midAuth, async (req, res)=>{
   try {
-      petPhoto = await PetPhotos.findById(req.params.photoId)
+      petPhoto = await PetPhotos.findById(req.body.photoId)
 
       petPhoto.info =  req.body.info
       petPhoto.save()

@@ -9,11 +9,11 @@ const DashLinks = () => {
             </Link>
 
             <Link to='/pets/new' className= 'btn btn-light'>
-              <i className='fas fa-paw text-primary'/>  Add a new pet
+              <i className='fas fa-paw text-primary'/>  Add New Pet
             </Link>
 
-            <Link to='/addPhoto' className= 'btn btn-light'>
-              <i className='fas fa-camera text-primary'/>  Add a photo
+            <Link to='/profiles' className= 'btn btn-light'>
+              <i className='fas fa-users text-primary'/> Profiles
             </Link>
         </div>
     )

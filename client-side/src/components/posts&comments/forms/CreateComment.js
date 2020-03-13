@@ -15,7 +15,6 @@ const CreateComment = ({ postId, addComment }) => {
         className='form my-1'
         onSubmit={e => {
           e.preventDefault()
-          console.log(postId)
           addComment(postId, { text })
           setText('')
         }}

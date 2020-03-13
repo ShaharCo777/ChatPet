@@ -135,6 +135,27 @@ img {
   margin: 3rem 0;
 }
 
+.card{
+  display: inline-block;
+  background: rgb(204, 204, 191);
+  margin: 40px 40px
+}
+
+.card img{
+  width: 270px;
+  height: 200px;
+}
+
+/* .shop_cards{
+  display: grid;
+  grid-template-columns: 300px 300px;
+  align-items: center;
+  grid-gap: 2rem;
+  padding: 1rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+} */
+
 .btn {
   display: inline-block;
   background: var(--light-color);
@@ -201,7 +222,7 @@ img {
 .bg-warning,
 .badge-warning,
 .alert-warning {
-  background: rgb(218, 215, 42);
+  background: rgb(218, 200, 42);
   color: black;
 }
 
@@ -275,6 +296,13 @@ button:hover,
   margin-bottom: 0.5rem;
   font-size: 1.2rem;
   border: 1px solid #ccc;
+}
+
+.form input[type='number']{
+  width: 90px;
+  font-size: 0.9rem;
+  padding-left: 0.9px;
+  margin-left: 2px;
 }
 
 .form input[type='submit'],
@@ -439,6 +467,18 @@ button {
   margin-right: 0.6rem;
 }
 
+.navbar_sale {
+  margin: 64px -32px;
+}
+
+.navbar_sale a{
+  color: rgb(54, 6, 6);
+}
+.dash-buttons .btn{
+ width: 180px;
+ margin-bottom: 3px;
+}
+
 /* photos */
 
 .crop-container {
@@ -571,6 +611,7 @@ padding-left: 30%;
   position: relative;
   background: url('./img/staertPic.jfif') no-repeat center center/cover;
   height: 100vh;
+  
 }
 
 .landing-inner {
@@ -822,6 +863,7 @@ transition: visibility 0s, opacity 0.5s linear;
   position: absolute;
   margin: -45px 100px;
   font-size: 2rem;
+  width: 70%;
 }
 
 .btnphoto{
@@ -856,6 +898,7 @@ display: block;
 .petBarUnit{
   border-style: solid;
   padding: 20px 0;
+  margin: 0 15px;
   border-color: rgb(8, 107, 107);
  }
 
@@ -886,26 +929,52 @@ height: 200px;
 .petNewImage textarea{
   width: 200px;
 }
-/* .petTop{
-height: 100px;
-} */
 
-.petTop i {
-margin: -10px 470px;
-position: absolute;
+.petTop .icons {
+margin: 5px 83%;
+font-size: 2.5vh;
+position: relative;
+/* position: absolute; */
 }
 
+.petTop .icons i{
+  margin-left: 10px;
+  /* font-size: 3vh; */
+  text-align: end;
+  display: inline;
+  }
+
 .petDescrption {
-  margin: 10px 5px;
-  width: 500px;
+  width:90%;
+  padding: 0 5px;
+  margin-bottom: 25px;
+  font-style: italic;
   border-style: groove;
   border-width: 1px;
   border-radius: 15px;
-  border-color: rgb(177, 199, 247);
+  border-color: rgb(178, 177, 247);
 }
 
-#petAge{
-text-align-last: right;
+.petInfo{
+  padding: 0 5px;
+  width: 250px;
+  border-style: ridge;
+  border-width: 1px;
+  margin-bottom: 25px;
+}
+
+.fa-info-circle{
+  position: relative;
+}
+
+.fa-check-square{
+  float: right;
+  margin-top: 5px;
+  color: rgb(16, 39, 88)
+}
+
+#petCost{
+  float: right;
 }
 
 /* Posts Page */
@@ -988,6 +1057,17 @@ text-align-last: right;
 
   .navbar .welcome {
     display: none;
+  }
+  .navbar_sale {
+    margin: 106px -32px;
+  }
+
+  .navbar_sale h1 {
+    margin-bottom: 0.1rem;
+  }
+  
+  .navbar_sale span {
+    padding: 0 8px;
   }
 
   /* Profiles Page */

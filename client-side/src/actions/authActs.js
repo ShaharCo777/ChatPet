@@ -12,7 +12,6 @@ import {
 import { setAlert } from './alertAct'
 import setAuthToken from '../setAuthToken'
 
-
 //register
 export const register = ({ name, email, password }) => async dispatch => {
   const config = {

@@ -3,17 +3,11 @@ const mongoose = require('mongoose')
 const PostsSchema = new mongoose.Schema({
     user:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'user'
     },
     text:{
         type: String,
         required: true
-    },
-    name: {
-        type: String
-    },
-    avatar: {
-        type: String
     },
     image: {
         type: String

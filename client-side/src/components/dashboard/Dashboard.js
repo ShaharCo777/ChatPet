@@ -35,7 +35,7 @@ const Dashboard = ({
         /> : <Fragment >
             <div className='userPet'>
         <Grid container spacing={2}>
-            {pets && pets.map(pet => 
+            {!pets.loading && pets.map(pet => 
                 <Grid item xs={12} md={6} lg={12} >
                 <PetItem key={pet._id} pet={pet} owner={true}/>
                 <br/><br/>

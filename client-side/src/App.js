@@ -25,6 +25,10 @@ import PetProfilePicture from './components/PetProfile/forms/PetProfilePicture'
 import Posts from './components/posts&comments/showPosts/Posts'
 import Post from './components/posts&comments/showPosts/PostPage/Post'
 
+//sales
+import PetsForSale from './components/petSales/buy_pets/PetsForSale'
+import SalesMain from './components/petSales/SalesMain'
+
 //authentication
 import Alert from './components/layout/Alert'
 import {loadUser} from './actions/authActs'
@@ -54,7 +58,6 @@ return(
     <Alert/>
     <Switch>
       {/* main */}
-    <Route exact path='/' component={Landing}/>
     <Route exact path='/register' component={Register}/>
     <Route exact path='/login' component={Login}/>    
     <PrivateRoute exact path='/dashboard' component={Dashboard}/>  
@@ -81,8 +84,10 @@ return(
     <PrivateRoute exact path='/posts' component={Posts}/>  
     <PrivateRoute exact path='/posts/:postId' component={Post}/>  
 
-
+    {/* sales */}
+    <PrivateRoute path='/saleingPage' component={SalesMain}/>  
     </Switch>
+
   </section>
 </Router>
 </Provider>
