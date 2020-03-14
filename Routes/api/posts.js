@@ -31,9 +31,9 @@ router.post('/',
             text: req.body.text,
             user: req.user.id
         })
-
         const post = await newPost.save()
-        console.log(post)
+        post.user = await User.findById(req.user.id)
+        .select('name').select('avatar')
         res.json(post)
     } catch (err) {
         console.error(err.message)
@@ -109,7 +109,7 @@ router.delete('/:postId', midAuth, async (req, res)=>{
 // @route  put api/posts/like/:id
 // @goal   like a post
 // @access  private
-router.put('/like/:postId', midAuth, async (req, res) => {
+router.put('/postLike/:postId', midAuth, async (req, res) => {
     try {
         const post = await Post.findById(req.params.postId)
         if(post.likes.filter(like => like.user.toString() === req.user.id).length > 0){
@@ -130,7 +130,7 @@ router.put('/like/:postId', midAuth, async (req, res) => {
 // @route  put api/posts/unlike/:id
 // @goal   unlike a post
 // @access  private
-router.put('/unlike/:postId', midAuth, async (req, res) => {
+router.put('/postUnlike/:postId', midAuth, async (req, res) => {
     try {
         const post = await Post.findById(req.params.postId)
         if(post.likes.filter(like => like.user.toString() == req.user.id).length == 0){
@@ -148,6 +148,48 @@ router.put('/unlike/:postId', midAuth, async (req, res) => {
     }
 })
 
+
+// @route  put api/posts/like/:id
+// @goal   like a comment
+// @access  private
+router.put('/commentLike/:commentId', midAuth, async (req, res) => {
+    try {
+        const comment = await Comment.findById(req.params.commentId)
+        if(comment.likes.filter(like => like.user.toString() === req.user.id).length > 0){
+            return res.status(400).json({ msg:'You have been liked that post'})
+        }
+        comment.likes.unshift({ user: req.user.id})
+
+        await comment.save()
+
+        res.json(comment.likes)
+    } catch(err) {
+        console.error(err.message)
+        res.status(500).send('Server error')
+    }
+})
+
+
+// @route  put api/posts/unlike/:id
+// @goal   unlike a comment
+// @access  private
+router.put('/commentUnlike/:commentId', midAuth, async (req, res) => {
+    try {
+        const comment = await Comment.findById(req.params.commentId)
+        if(comment.likes.filter(like => like.user.toString() == req.user.id).length == 0){
+            return res.status(400).json({ msg:'Post hasent been liked yet'})
+        }
+        const deletedLike = comment.likes.map(like => like.user.toString())
+             .indexOf(req.user.id)
+             comment.likes.splice(deletedLike, 1)
+        await comment.save()
+
+        res.json(comment.likes)
+    } catch(err) {
+        console.error(err.message)
+        res.status(500).send('Server error')
+    }
+})
 
 // @route  post api/posts/comment/:postId
 // @goal   add a comment
@@ -175,6 +217,8 @@ router.post(
             user: req.user.id
         })
         await comment.save()
+        comment.user = await User.findById(req.user.id)
+        .select('name').select('avatar')
         res.json(comment)
       } catch (err) {
         console.error(err.message)

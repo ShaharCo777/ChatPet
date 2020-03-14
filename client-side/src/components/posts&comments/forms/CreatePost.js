@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -7,7 +7,7 @@ import { addPost } from '../../../actions/postActs'
 const CreatePost = ({ addPost }) => {
   const [text, setText] = useState('')
 
-  return (
+    return (
     <div className='post-form'>
       <div className='bg-primary p'>
         <h3>Say Something...</h3>

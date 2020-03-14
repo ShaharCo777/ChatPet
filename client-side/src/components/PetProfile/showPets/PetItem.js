@@ -35,7 +35,7 @@ const PetItem = ({
             {cost &&
             <p className='my-1'>
                 <span>
-                {cost} 
+                {cost} $
                </span>
             </p>}
             <button className='btn btn-light'>

@@ -56,7 +56,7 @@ const CreatePetProfile = ({createPet, history}) => {
   <Fragment>
   <section className="container">
       <h1 className="large text-primary">
-        Create Your Pet Profile
+        Create your pet profile
       </h1>
       <p className="lead">
         <i className="fas fa-pet"></i> Let's get some information about your pet
@@ -74,7 +74,7 @@ const CreatePetProfile = ({createPet, history}) => {
           <select name="sex" onChange={(e) => onChange(e)}>
             <option value="0">* Select Your Pet Gender</option>
             <option value="male">Male</option>
-            <option value="female">female</option>
+            <option value="female">Female</option>
             <option value="other">Other</option>
           </select>
         </div>
@@ -88,15 +88,15 @@ const CreatePetProfile = ({createPet, history}) => {
           <input type="text" placeholder="Pet's Type" 
           name="type" onChange={(e) => onChange(e)}/>
           <small className="form-text"
-            >What Kind Of Animal Is It?</small>
+            >What kind of animal is it?</small>
         </div>
         <div className="form-group">
           <input type="text" placeholder="Pet's Race" 
           name="race" onChange={(e) => onChange(e)}/>
           <small className="form-text"
-            >Only If You Know</small>
+            >Only if you know</small>
         </div>
-        <label className="checkBox">Is Your Pet Traind?
+        <label className="checkBox">Is your pet traind?
         <input type="checkbox"
          name='traind'
          onChange={() =>{
@@ -104,7 +104,7 @@ const CreatePetProfile = ({createPet, history}) => {
         <span className="checkmark"></span>
         </label>
 
-        <label className="checkBox">Is Your Pet For Sale?
+        <label className="checkBox">Is your pet for sale?
         <input type="checkbox"
          name='forSale'
          onChange={() =>{
@@ -120,7 +120,7 @@ const CreatePetProfile = ({createPet, history}) => {
         placeholder='In Dollars'
         onChange={(e) => onChange(e)}/>
         <small className="form-text"
-        >Please Enter Just Numbers
+        >Please enter just numbers
         </small></Fragment>)}
 
       <Grid container spacing={3}>
@@ -141,7 +141,7 @@ const CreatePetProfile = ({createPet, history}) => {
           name="descreption" onChange={(e) => onChange(e)}/>
           <small className="form-text">Add what ever you want</small>
         </div>
-        <input type="submit" className="btn btn-primary my-1" />
+        <input type="submit" className="btn btn-primary my-1" value='Submit'/>
         <a className="btn btn-light my-1" >Go Back</a>
       </form>
     </section>

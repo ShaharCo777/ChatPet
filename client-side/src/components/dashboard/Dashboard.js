@@ -12,7 +12,7 @@ import {getUserPets
 import spinner from '../../img/spinner.gif'
 import DashLinks from './DashLinks'
 import PetItem from '../PetProfile//showPets/PetItem'
-
+import CreatePost from '../posts&comments/forms/CreatePost'
 const Dashboard = ({
     getUserProfile,
     deleteAccount,
@@ -35,7 +35,7 @@ const Dashboard = ({
         /> : <Fragment >
             <div className='userPet'>
         <Grid container spacing={2}>
-            {!pets.loading && pets.map(pet => 
+            {pets && !pets.loading && pets.map(pet => 
                 <Grid item xs={12} md={6} lg={12} >
                 <PetItem key={pet._id} pet={pet} owner={true}/>
                 <br/><br/>
@@ -62,10 +62,13 @@ const Dashboard = ({
                     <p>You don't have a profile,</p>
                     <p>for setting one, please click on "Create Profile"</p><br/>
                     <Link to='/profiles/new' className='btn btn-primary my-1'>
-                    <i className="fas fa-user-circle"/>Create Profile
+                    <i className="fas fa-user-circle"/> Create Profile
                     </Link>
                 </Fragment>
                 )}
+                <br/>
+                <div className="half">
+                    <CreatePost/></div>
                 <div className='my-2'>
                 <button className='btn btn-danger' onClick={() =>
                      deleteAccount()}>

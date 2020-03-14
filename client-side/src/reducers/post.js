@@ -6,7 +6,8 @@ import{
     DELETE_POST,
     REMOVE_COMMENT,
     POST_ERROR,
-    UPDATE_LIKES
+    UPDATE_POST_LIKES,
+    UPDATE_COMMENT_LIKES
 
 
 } from '../actions/consts'
@@ -49,7 +50,7 @@ export default function(state = inItialState, action) {
                      post._id !== data),
                 loading: false
             }
-        case UPDATE_LIKES:
+        case UPDATE_POST_LIKES:
             return{
                 ...state,
                 posts: state.posts.map(post => 
@@ -57,6 +58,14 @@ export default function(state = inItialState, action) {
                     {...post, likes: data.likes} : post),
                 loading: false
             }
+        case UPDATE_COMMENT_LIKES:
+            return{
+                ...state,
+                comments: state.comments.map(comment => 
+                    comment._id === data.commentId ? 
+                    {...comment, likes: data.likes} : comment),
+                loading: false
+                }
         case POST_ERROR:
             return{
                 ...state,

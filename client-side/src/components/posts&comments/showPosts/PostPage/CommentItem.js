@@ -4,16 +4,19 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Moment from 'react-moment'
 
-import { deleteComment } from '../../../../actions/postActs'
+import { removeCommentLike, addCommentLike, deleteComment } from '../../../../actions/postActs'
 
 const CommentItem = ({
   comment: {
     _id,
     text,
     date,
+    likes,
     user
 },
   auth,
+  removeCommentLike,
+  addCommentLike,
   deleteComment
 }) => (
   <div className='post bg-white p-1 my-1'>
@@ -28,6 +31,21 @@ const CommentItem = ({
       <p className='post-date'>
         Posted on <Moment format='YYYY/MM/DD'>{date}</Moment>
       </p>
+      <button
+            onClick={() => addCommentLike(_id)}
+            type='button'
+            className='btn btn-light'
+          >
+            <i className='fas fa-thumbs-up' />{' '}
+          <span>{likes && likes.length > 0 && <span>{likes.length}</span>}</span>
+          </button>
+          <button
+            onClick={() => removeCommentLike(_id)}
+            type='button'
+            className='btn btn-light'
+          >
+            <i className='fas fa-thumbs-down' />
+          </button>
       {!auth.loading && user._id === auth.user._id && (
         <button
           onClick={() => deleteComment(_id)}
@@ -44,6 +62,8 @@ const CommentItem = ({
 CommentItem.propTypes = {
   comment: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
+  addCommentLike: PropTypes.func.isRequired,
+  removeCommentLike: PropTypes.func.isRequired,
   deleteComment: PropTypes.func.isRequired
 }
 
@@ -52,4 +72,4 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps,
-{ deleteComment })(CommentItem)
+{ deleteComment, addCommentLike, removeCommentLike })(CommentItem)

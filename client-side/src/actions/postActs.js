@@ -7,7 +7,8 @@ import {
     GET_POST,
     GET_POSTS,
     DELETE_POST,
-    UPDATE_LIKES,
+    UPDATE_POST_LIKES,
+    UPDATE_COMMENT_LIKES,
     POST_ERROR
 
 } from './consts'
@@ -23,8 +24,6 @@ export const addPost = post => async dispatch =>{
           }
 
         const res = await axios.post('/api/posts', post, config)
-
-        console.log(res.data)
         dispatch({
             type: ADD_POST,
             data: res.data
@@ -159,13 +158,13 @@ export const deleteComment = (commentId) => async dispatch =>{
 }
 
 
-// add like
-export const addLike = postId => async dispatch =>{
+// add like to post
+export const addPostLike = postId => async dispatch =>{
     try {
-        const res = await axios.put(`/api/posts/like/${postId}`)
+        const res = await axios.put(`/api/posts/postLike/${postId}`)
 
         dispatch({
-            type: UPDATE_LIKES,
+            type: UPDATE_POST_LIKES,
             data: {postId, likes: res.data}
         })
     } catch (err) {
@@ -180,14 +179,55 @@ export const addLike = postId => async dispatch =>{
 }
 
 
-// remove like
-export const removeLike = postId => async dispatch =>{
+// remove like from post
+export const removePostLike = postId => async dispatch =>{
     try {
-        const res = await axios.put(`/api/posts/unlike/${postId}`)
+        const res = await axios.put(`/api/posts/postUnlike/${postId}`)
 
         dispatch({
-            type: UPDATE_LIKES,
+            type: UPDATE_POST_LIKES,
             data: {postId, likes: res.data}
+        })
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            data: { 
+                msg: err,
+                status: err
+            }
+        })
+    }
+}
+
+// add like to comment
+export const addCommentLike = commentId => async dispatch =>{
+    try {
+        const res = await axios.put(`/api/posts/commentLike/${commentId}`)
+
+        dispatch({
+            type: UPDATE_COMMENT_LIKES,
+            data: {commentId, likes: res.data}
+        })
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            data: { 
+                msg: err,
+                status: err
+            }
+        })
+    }
+}
+
+
+// remove like from post
+export const removeCommentLike = commentId => async dispatch =>{
+    try {
+        const res = await axios.put(`/api/posts/commentUnlike/${commentId}`)
+        console.log(res.data)
+        dispatch({
+            type: UPDATE_COMMENT_LIKES,
+            data: {commentId, likes: res.data}
         })
     } catch (err) {
         dispatch({
