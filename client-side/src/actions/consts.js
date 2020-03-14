@@ -31,7 +31,7 @@ export const DELETE_PET = 'DELETE_PET'
 export const DELETE_PHOTO = 'DELETE_PHOTO'
 export const PET_ERROR = 'PET_ERROR'
 export const CLEAR_PET = 'CLEAR_PET'
-export const CLEAR_PET = 'CLEAR_PETS'
+export const CLEAR_PETS = 'CLEAR_PETS'
 
 
 //POST
@@ -41,7 +41,7 @@ export const ADD_POST = 'ADD_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const POST_ERROR = 'POST_ERROR'
 export const CLEAR_POST = 'CLEAR_POST'
-export const CLEAR_POSTS = 'CLEAR_POST'
+export const CLEAR_POSTS = 'CLEAR_POSTS'
 
 //comments
 export const ADD_COMMENT ='ADD_COMMENT'
