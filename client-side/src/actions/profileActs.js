@@ -3,6 +3,8 @@ import {setAlert} from './alertAct'
 
 import{
     CLEAR_PROFILE,
+    CLEAR_PETS,
+    CLEAR_PET,
     GET_PROFILE,
     GET_PROFILES,
     UPDATE_PROFILE_USER,
@@ -57,6 +59,7 @@ export const createProfile = (FormData, history, edit = false) => async dispatch
 //get user profile
 export const getUserProfile = () => async dispatch => {
 try{
+  dispatch({type: CLEAR_PET})
   const res = await axios.get('/api/profile/me')
     dispatch({
         type: GET_PROFILE,
@@ -78,6 +81,7 @@ try{
 // get all the profiles
 export const getProfiles = () => async dispatch => {
       dispatch({type: CLEAR_PROFILE})
+      dispatch({type: CLEAR_PETS})
       try{
         const res = await axios.get('/api/profile')
       
@@ -100,6 +104,7 @@ export const getProfiles = () => async dispatch => {
 // get profile by id
 export const getProfileById = userId => async dispatch => {
   try{
+    dispatch({type: CLEAR_PET})
     const res = await axios.get(`/api/profile/user/${userId}`)
   
       dispatch({
@@ -164,7 +169,9 @@ export const deleteAccount = () => async dispatch => {
     if (window.confirm('Are you sure? This can NOT be undone!')) {
       try {
         await axios.delete('/api/profile/me')
-  
+        
+        dispatch({type: CLEAR_PET})
+        dispatch({type: CLEAR_PETS})
         dispatch({ type: CLEAR_PROFILE })
         dispatch({ type: ACCOUNT_DELETED })
   
@@ -176,5 +183,4 @@ export const deleteAccount = () => async dispatch => {
         })
       }
     }
-    //תזכור להוסיף פקודה שמוחקת את כל החיות של המשתמש
 }

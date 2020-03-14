@@ -6,6 +6,8 @@ import {
     REMOVE_COMMENT,
     GET_POST,
     GET_POSTS,
+    CLEAR_POST,
+    CLEAR_POSTS,
     DELETE_POST,
     UPDATE_POST_LIKES,
     UPDATE_COMMENT_LIKES,
@@ -93,6 +95,7 @@ export const getPost = postId => async dispatch =>{
 
 //get all the posts
 export const getPosts = () => async dispatch =>{
+    dispatch({type: CLEAR_POT})
     try {
         const res = await axios.get('/api/posts')
 

@@ -31,6 +31,7 @@ export const DELETE_PET = 'DELETE_PET'
 export const DELETE_PHOTO = 'DELETE_PHOTO'
 export const PET_ERROR = 'PET_ERROR'
 export const CLEAR_PET = 'CLEAR_PET'
+export const CLEAR_PET = 'CLEAR_PETS'
 
 
 //POST
@@ -39,9 +40,11 @@ export const GET_POSTS = 'GET_POSTS'
 export const ADD_POST = 'ADD_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const POST_ERROR = 'POST_ERROR'
-export const UPDATE_POST_LIKES = 'UPDATE_POST_LIKES'
-export const UPDATE_COMMENT_LIKES ='UPDATE_COMMENT_LIKES'
+export const CLEAR_POST = 'CLEAR_POST'
+export const CLEAR_POSTS = 'CLEAR_POST'
 
 //comments
 export const ADD_COMMENT ='ADD_COMMENT'
 export const REMOVE_COMMENT ='REMOVE_COMMENT'
+export const UPDATE_POST_LIKES = 'UPDATE_POST_LIKES'
+export const UPDATE_COMMENT_LIKES ='UPDATE_COMMENT_LIKES'

@@ -3,13 +3,13 @@ import{
     ADD_COMMENT,
     GET_POST,
     GET_POSTS,
+    CLEAR_POST,
+    CLEAR_POSTS,
     DELETE_POST,
     REMOVE_COMMENT,
     POST_ERROR,
     UPDATE_POST_LIKES,
     UPDATE_COMMENT_LIKES
-
-
 } from '../actions/consts'
 
 const inItialState ={
@@ -43,6 +43,19 @@ export default function(state = inItialState, action) {
                 posts: [data, ...state.posts],
                 loading: false
             }
+        case CLEAR_POST:
+            return{
+                ...state,
+                post: null,
+                comments: [],
+                loading: false
+            }
+        case CLEAR_POSTS:
+            return{
+                ...state,
+                posts: [],
+                loading: false
+                    }
         case DELETE_POST:
             return {
                 ...state,

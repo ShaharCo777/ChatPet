@@ -5,6 +5,7 @@ import{
     GET_PETS,
     ADD_PHOTO,
     PET_PHOTOS,
+    CLEAR_PET,
     DELETE_PET,
     DELETE_PHOTO,
     PET_ERROR
@@ -210,7 +211,6 @@ export const getPetById = petId => async dispatch => {
       })
 }}
 
-  
 //  get pet photos by petId
 export const getPetPhotos = petId => async dispatch => {
   try{
@@ -234,6 +234,7 @@ export const getPetPhotos = petId => async dispatch => {
 // get all the user pets
 export const getUserPets = () => async dispatch => {
   try{
+        dispatch({type: CLEAR_PET})
         const res = await axios.get('/api/pets')
           dispatch({
               type: GET_PETS,
@@ -253,6 +254,7 @@ export const getUserPets = () => async dispatch => {
 // get all the user pets
 export const getPetsByUserId = userId => async dispatch => {
   try{
+        dispatch({type: CLEAR_PET})
         const res = await axios.get(`/api/pets/allUserPets/${userId}`)
           dispatch({
               type: GET_PETS,
@@ -271,6 +273,7 @@ export const getPetsByUserId = userId => async dispatch => {
 
 export const getPetsForSale = () => async dispatch =>{
   try{
+    dispatch({type: CLEAR_PET})
     const res = await axios.get('/api/pets/petsForSale')
     dispatch({
       type: GET_PETS,
@@ -297,7 +300,6 @@ export const deletePet = (petId, history) => async dispatch =>{
           data: petId
       })
       if(history) history.push('/dashboard')
-      console.log('maybe here')
       dispatch(setAlert('Pet Removed', 'success'))
   } catch (err) {
       dispatch({
