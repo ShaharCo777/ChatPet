@@ -95,7 +95,7 @@ export const getPost = postId => async dispatch =>{
 
 //get all the posts
 export const getPosts = () => async dispatch =>{
-    dispatch({type: CLEAR_POT})
+    dispatch({type: CLEAR_POST})
     try {
         const res = await axios.get('/api/posts')
 
