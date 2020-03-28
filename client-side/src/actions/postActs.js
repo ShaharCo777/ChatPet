@@ -75,6 +75,7 @@ export const addComment = (postId, comment) => async dispatch =>{
 
 //get spesific post
 export const getPost = postId => async dispatch =>{
+    dispatch({type: CLEAR_POSTS})
     try {
         const res = await axios.get(`/api/posts/${postId}`)
         dispatch({
@@ -98,11 +99,11 @@ export const getPosts = () => async dispatch =>{
     dispatch({type: CLEAR_POST})
     try {
         const res = await axios.get('/api/posts')
-
         dispatch({
             type: GET_POSTS,
             data: res.data
         })
+    
     } catch (err) {
         dispatch({
             type: POST_ERROR,
@@ -114,6 +115,16 @@ export const getPosts = () => async dispatch =>{
     }
 }
 
+
+export const sortPosts = (filed, posts) => async dispatch =>{
+        if(filed[0] == '-')await posts.sort((a, b) => (a[filed] > b[filed]) ? 1 : -1)
+        else await posts.sort((a, b) => (a[filed] < b[filed]) ? 1 : -1)
+
+        dispatch({
+            type: GET_POSTS,
+            data: posts
+        })
+    }
 
 // delete post
 export const deletePost = postId => async dispatch =>{

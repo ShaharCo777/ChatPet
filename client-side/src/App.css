@@ -50,6 +50,29 @@ img {
   display: 'block'; 
 }
 
+.search{
+  display: inline-block;
+}
+.search h5{
+float: right;
+margin: 3px;
+font-size: 12px;
+font-weight: 550;
+}
+.search h6{
+  float: right;
+  margin-top: 5px;
+}
+.search input[type='checkBox']{
+  margin-left: 10px;
+}
+
+.sort h5{
+  float: right;
+  font-size: 12px;
+  font-weight: 550;
+}
+
 /* Text Styles*/
 .x-large {
   font-size: 4rem;
@@ -1023,6 +1046,40 @@ position: relative;
     margin-top: 8rem;
   }
 
+  .search{
+    display: ruby;
+  }
+
+  .search input[type='text']{
+    width:45%;
+    float: left;
+
+  }
+
+  .search h5{
+  margin-right: 48%;
+  float: left;    
+}
+
+  /* .search h6{
+    float: left;    
+  } */
+
+  .search input[type='checkBox']{
+    margin-left: 4px;
+  }
+
+  .sort h5{
+  margin-left:75%;
+  margin-top:-55px;
+  /* float: left; */
+  position: static;
+  }
+
+  .sort select{
+  width:65px;
+    }
+
   .hide-sm {
     display: none;
   }
@@ -1098,6 +1155,7 @@ position: relative;
   .post button {
     padding: 0.3rem 0.4rem;
   }
+
 }
 
 
