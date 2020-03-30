@@ -12,17 +12,18 @@ import PetImage from './PetImage'
 const CreatePetProfile = ({createPet, history}) => {
   const [images, setImages] = useState([])
   const [forSale, setForSale] = useState(false)
+  const [date, setDate] = useState(new Date())
   const [petFormData, setPetFormData] = useState({
       name:'',
       sex:'',
       type:'',
       race:'',
-      age:null,
+      birthDate:'',
+      adoptionDate:'',
       descreption:'',
       traind:false,
       cost:''
   })
-
   const getBase64 = (image) => {
     return new Promise((resolve,reject) => {
       const reader = new FileReader()
@@ -66,36 +67,34 @@ const CreatePetProfile = ({createPet, history}) => {
       <div className="form-group">
           <input type="text" placeholder="* Pet's Name"
            name="name" onChange={(e) => onChange(e)}/>
-          <small className="form-text"
-            >This is how your pet will be presented
-            </small>
         </div>
         <div className="form-group">
-          <select name="sex" onChange={(e) => onChange(e)}>
-            <option value="0">* Select Your Pet Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
+          <select  name="sex" className={petFormData.sex != '' ? "":'form-text'} onChange={(e) => onChange(e)}>
+            <option  value="">* Select Your Pet Gender</option>
+            <option value="male" >Male</option>
+            <option value="female" >Female</option>
+            <option value="other" >Other</option>
           </select>
-        </div>
-        <div className="form-group">
-          <input type="text" placeholder="Pet's Age" 
-          name="age" onChange={(e) => onChange(e)}/>
-          <small className="form-text"
-            >How old is it?</small>
         </div>
         <div className="form-group">
           <input type="text" placeholder="Pet's Type" 
           name="type" onChange={(e) => onChange(e)}/>
-          <small className="form-text"
-            >What kind of animal is it?</small>
         </div>
         <div className="form-group">
           <input type="text" placeholder="Pet's Race" 
           name="race" onChange={(e) => onChange(e)}/>
-          <small className="form-text"
-            >Only if you know</small>
         </div>
+        <div className="form-group">
+        <label className="date">Date of birth: 
+        <input type="date" name='birthDate'
+         max={date.toISOString().split("T")[0]}
+         onChange={(e) => onChange(e)}/></label>
+        <label className="date">The date you first get your pet: 
+        <input  type="date" name='adoptionDate'
+         max={date.toISOString().split("T")[0]}
+         onChange={(e) => onChange(e)}/></label>
+        </div>
+
         <label className="checkBox">Is your pet traind?
         <input type="checkbox"
          name='traind'
@@ -104,14 +103,13 @@ const CreatePetProfile = ({createPet, history}) => {
         <span className="checkmark"></span>
         </label>
 
-        <label className="checkBox">Is your pet for sale?
+        <label className="checkBox">Is your pet for sale or adoption?
         <input type="checkbox"
          name='forSale'
          onChange={() =>{
         setForSale(!forSale)}}/>
         <span className="checkmark"></span>
         </label>
-
        {forSale && (<Fragment>
         <i className="fas fa-dollar-sign"></i>
         <input type='number'

@@ -69,7 +69,8 @@ router.post(
         sex,
         type,
         race,
-        age,
+        adoptionDate,
+        birthDate,
         traind,
         descreption,
         cost
@@ -86,7 +87,8 @@ router.post(
             sex,
             type,
             race,
-            age,
+            adoptionDate,
+            birthDate,
             traind,
             descreption,
             cost
@@ -128,7 +130,8 @@ router.put(
       sex,
       type,
       race,
-      age,
+      adoptionDate,
+      birthDate,
       traind,
       descreption,
       cost
@@ -142,7 +145,8 @@ router.put(
       pet.traind = traind
       pet.type = type
       pet.race = race
-      pet.age = age
+      pet.adoptionDate = adoptionDate
+      pet.birthDate =birthDate
       pet.descreption = descreption
 
      await pet.save()

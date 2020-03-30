@@ -27,3 +27,10 @@ export const textSearch = (val, arr, type, optin=0) => async dispatch =>{
         return results
 
 }
+
+export const getAge = birthDay =>{
+    const bDay = new Date(birthDay)
+    let age = Date.now() - bDay.getTime()
+    age = new Date(age)
+    return (age.getFullYear()-1970)
+}

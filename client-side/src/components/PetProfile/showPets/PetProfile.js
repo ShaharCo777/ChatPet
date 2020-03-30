@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 import { getPetById, getPetPhotos, deletePet } from '../../../actions/petActs'
+import { getAge } from '../../../actions/generalActs'
 
 import spinner from '../../../img/spinner.gif'
 import PetPhotos from './PetPhotos'
@@ -22,10 +23,19 @@ function PetProfile({
     }
 }) {
 
+const [age, setAge] = useState(null)
+
 useEffect(() => {
     getPetById(match.params.petId)
     getPetPhotos(match.params.petId)
     }, [getPetById, getPetPhotos, match])
+
+
+    useEffect(() => {
+        if(pet && pet.birthDate){ 
+            setAge(getAge(pet.birthDate))
+        } 
+    }, [pet])
 
     return (
         <Fragment>
@@ -59,9 +69,10 @@ useEffect(() => {
             <div className='petDescrption'>
              {pet.descreption}
             </div>
+            {pet.adoptionDate && <h4 className='adoptionDate'>Together since {pet.adoptionDate.split("T")[0]}</h4>}
             <div className='petInfo'>
-            {pet.traind && <i className="far fa-check-square" id='traind'> Traind</i>}               
-            {pet.age && <strong>Age: {pet.age}<br/></strong>}
+            {pet.traind && <i className="far fa-check-square"> Traind</i>}               
+            {age && <strong>Age: {age}<br/></strong>}
             {pet.type && <strong>Type: {pet.type}<br/></strong>}
             {pet.cost && <small id='petCost'>Price: ${pet.cost}</small>}
             {pet.race && <strong>Race: {pet.race}<br/></strong>}
@@ -98,11 +109,12 @@ PetProfile.propTypes = {
 getPetById: PropTypes.func.isRequired,
 getPetPhotos: PropTypes.func.isRequired,
 deletePet: PropTypes.func.isRequired,
+getAge: PropTypes.func.isRequired,
 auth: PropTypes.object.isRequired,
 pet: PropTypes.object.isRequired
 }
 
 export default connect(mapStateToProps,
-    {getPetById,  getPetPhotos, deletePet}
+    {getPetById, getPetPhotos, deletePet, getAge}
     )(PetProfile)
 

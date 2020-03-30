@@ -306,11 +306,13 @@ button:hover,
   color: #888;
 }
 
+.form .form-optin{
+  color:black;
+}
 
 .form input[type='text'],
 .form input[type='email'],
 .form input[type='password'],
-.form input[type='date'],
 .form select,
 .form textarea {
   display: block;
@@ -320,6 +322,19 @@ button:hover,
   font-size: 1.2rem;
   border: 1px solid #ccc;
 }
+
+.form input[type='date']{
+  font-size: 1.2rem;
+  /* padding: 0.4rem; */
+  /* display: block; */
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+  border: 1px solid #ccc;
+  width: 25%;
+}
+
 
 .form input[type='number']{
   width: 90px;
@@ -388,13 +403,17 @@ button {
   color: #0077b5;
 }
 
+.date{
+  display: block;
+  font-size: 1.2rem;
+}
+
 .checkBox {
   display: block;
   position: relative;
   padding-left: 35px;
   margin-bottom: 12px;
   cursor: pointer;
-  font-size: 16px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -990,10 +1009,19 @@ position: relative;
   position: relative;
 }
 
+.adoptionDate{
+  float: right;
+  color: rgb(82, 82, 82);
+  margin-top: 50px;
+  text-shadow: -0.06px 0 black, 0 0.06px black, 0.06px 0 black, 0 -0.06px black;
+
+
+}
+
 .fa-check-square{
   float: right;
   margin-top: 5px;
-  color: rgb(16, 39, 88)
+  color: rgb(16, 39, 88);
 }
 
 #petCost{

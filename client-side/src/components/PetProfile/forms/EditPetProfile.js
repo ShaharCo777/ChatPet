@@ -25,7 +25,6 @@ const EditPetProfile = ({
       sex:'',
       type:'',
       race:'',
-      age:null,
       descreption:'',
       traind:false,
       cost:null
@@ -38,7 +37,6 @@ const EditPetProfile = ({
           sex: loading || !pet ? '' : pet.sex,
           type: loading || !pet ? '' : pet.type,
           race: loading || !pet ? '' : pet.race,
-          age: loading || !pet ? null : pet.age,
           descreption: loading || !pet ? '' : pet.descreption,
           traind:  loading || !pet ? false : pet.traind,
           cost: loading || !pet ? null : pet.cost
@@ -52,7 +50,6 @@ const EditPetProfile = ({
       sex,
       type,
       race,
-      age,
       descreption,
       traind,
       cost
@@ -90,31 +87,24 @@ const EditPetProfile = ({
             </small>
         </div>
         <div className="form-group">
-          <select name="sex" onChange={(e) => onChange(e)}>
+          <select name="sex" className={petFormData.sex != '' ? "":'form-text'} onChange={(e) => onChange(e)}>
             <option value="0">{sex !== '' ? sex : '* Select Your Pet Gender'}</option>
             <option value="male">Male</option>
             <option value="female">female</option>
             <option value="other">Other</option>
           </select>
         </div>
-        <div className="form-group">
-          <input type="text" value={age} placeholder="Pet's Age" 
-          name="age" onChange={(e) => onChange(e)}/>
-          <small className="form-text"
-            >How old is it?</small>
-        </div>
+
         <div className="form-group">
           <input type="text" placeholder="Pet's Type" value={type}
           name="type" onChange={(e) => onChange(e)}/>
-          <small className="form-text"
-            >What Kind Of Animal Is It?</small>
+
         </div>
         <div className="form-group">
           <input type="text" placeholder="Pet's Race" value={race}
           name="race" onChange={(e) => onChange(e)}/>
-          <small className="form-text"
-            >Only If You Know</small>
         </div>
+
         <label className="checkBox">Is Your Pet Traind?
         <input type="checkbox"
          value={traind}

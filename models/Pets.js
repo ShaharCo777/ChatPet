@@ -22,8 +22,11 @@ const PetSchema = new mongoose.Schema({
     race:{
         type:String
     },
-    age:{
-        type: Number
+    birthDate:{
+        type: Date
+    },
+    adoptionDate:{
+        type: Date
     },
     traind:{
         type: Boolean
