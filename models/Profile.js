@@ -20,19 +20,9 @@ const ProfileSchema = new mongoose.Schema({
             type: String
         }
     },
-    birthDay:{
-        day:{
-            type: String,
-            required: true
-        },
-        month:{
-            type: String,
-            required: true
-        },
-        year:{
-            type: String,
-            required: true
-        }
+    birthDate:{
+        type: Date,
+        required: true
     },
     loveToPet:{
         when:{

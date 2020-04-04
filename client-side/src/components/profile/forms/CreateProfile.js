@@ -11,9 +11,7 @@ const Profile = ({createProfile, history}) => {
         contry:'',
         city:'',
         street:'',
-        day:'',
-        month:'',
-        year:'',
+        birthDate:'',
         when:'',
         how:'',
         what:'',
@@ -35,9 +33,7 @@ const Profile = ({createProfile, history}) => {
           contry,
           city,
           street,
-          day,
-          month,
-          year,
+          birthDate,
           when,
           how,
           what,
@@ -95,19 +91,9 @@ const Profile = ({createProfile, history}) => {
 
         <div className="form-group input-birthday">
         <h3>When is your Birth day?</h3><br/>
-        <small className="form-text">The first one</small>
-        <select name='day' id='day' value={day} onChange={(e) => onChange(e)}>
-        <option value="0">* Day</option>
-          {makeNumOption(1, 31)}
-        </select>
-        <select name='month' id='month' value={month} onChange={(e) => onChange(e)}>
-        <option value="0">* Month</option>
-            {makeNumOption(1, 12)}
-        </select>
-        <select name='year' id='year' value={year} onChange={(e) => onChange(e)}>
-        <option value="0">* Year</option>
-            {makeNumOption(new Date().getFullYear()-75, new Date().getFullYear()-16)}
-        </select>         
+        <input type="date" value={birthDate} name='birthDate'
+         max={new Date().toISOString().split("T")[0]}
+         onChange={(e) => onChange(e)}/>  
         </div> <br/>
 
         <div className="form-group input-lovePets">

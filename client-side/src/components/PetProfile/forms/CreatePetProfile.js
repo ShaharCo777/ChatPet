@@ -12,7 +12,6 @@ import PetImage from './PetImage'
 const CreatePetProfile = ({createPet, history}) => {
   const [images, setImages] = useState([])
   const [forSale, setForSale] = useState(false)
-  const [date, setDate] = useState(new Date())
   const [petFormData, setPetFormData] = useState({
       name:'',
       sex:'',
@@ -87,11 +86,11 @@ const CreatePetProfile = ({createPet, history}) => {
         <div className="form-group">
         <label className="date">Date of birth: 
         <input type="date" name='birthDate'
-         max={date.toISOString().split("T")[0]}
+         max={new Date().toISOString().split("T")[0]}
          onChange={(e) => onChange(e)}/></label>
         <label className="date">The date you first get your pet: 
         <input  type="date" name='adoptionDate'
-         max={date.toISOString().split("T")[0]}
+         max={new Date().toISOString().split("T")[0]}
          onChange={(e) => onChange(e)}/></label>
         </div>
 

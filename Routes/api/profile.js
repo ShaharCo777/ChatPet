@@ -32,13 +32,7 @@ router.post('/me', [
         check('contry', 'Contry is required')
         .not()
         .isEmpty(),
-        check('day', 'Day of birth is required')
-        .not()
-        .isEmpty(),
-        check('month', 'month of birth is required')
-        .not()
-        .isEmpty(),
-        check('year', 'year of birth is required')
+        check('birthDate', 'date of birth is required')
         .not()
         .isEmpty()
     ]
@@ -53,9 +47,7 @@ async(req, res) => {
     contry,
     city,
     street,
-    day,
-    month,
-    year,
+    birthDate,
     when,
     how,
     what,
@@ -74,16 +66,12 @@ async(req, res) => {
 const profileFields = {}
 profileFields.user = req.user.id
 if(genral) profileFields.genral = genral
+if(birthDate) profileFields.birthDate = new Date(birthDate)
 
 profileFields.location ={}
 profileFields.location.contry = contry
 if(city) profileFields.location.city = city
 if(street) profileFields.location.street = street
-
-profileFields.birthDay ={}
-if(day) profileFields.birthDay.day = day
-if(month) profileFields.birthDay.month = month
-if(year) profileFields.birthDay.year = year
 
 profileFields.loveToPet ={}
 if(when) profileFields.loveToPet.when = when
@@ -150,9 +138,12 @@ try{
 // @goal    get all profiles
 // @access   public
 
-router.get('/', async (req, res) => {
+router.get('/', [ midAuth,
+], async (req, res) => {
     try {
-        const profiles = await Profile.find().populate('user', ['name', 'avatar'])
+        let profiles = await Profile.find().populate('user', ['name', 'avatar'])
+        profiles = profiles.filter(profile =>
+            profile.user._id != req.user.id)
         res.json(profiles)
     } catch (error) {
         console.error(err.message)

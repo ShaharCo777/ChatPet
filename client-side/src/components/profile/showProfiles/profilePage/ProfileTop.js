@@ -4,12 +4,14 @@ import PropTypes from 'prop-types'
 const ProfileTop = ({
   profile: {
     location,
-    birthDay,
+    birthDate,
     getDataOf,
     social,
     user: { name, avatar }
   },
 }) => {
+  
+
   return (
     <div className='profile-top bg-primary p-2'>
     <div className='userProfile'>
@@ -83,7 +85,7 @@ const ProfileTop = ({
           </a>
         )}
       </div>
-      {birthDay && <small>Born at {birthDay.day}/{birthDay.month}/{birthDay.year}</small>}
+      {birthDate && <h5>Born at {new Date(birthDate).toDateString().slice(3)}</h5>}
 
     </div>
     </div>

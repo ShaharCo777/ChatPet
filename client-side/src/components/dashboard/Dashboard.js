@@ -28,7 +28,6 @@ const Dashboard = ({
         getUserProfile()
         getUserPets()
       }, [getUserProfile, getUserPets])
-
     return (
         loading && profile === null ? 
         <img src={spinner} alt='Loading...'
@@ -53,7 +52,7 @@ const Dashboard = ({
                     <p className='lead half'>
                     <i className='fas fa-user'></i>
                     Welcome {user && user.name}</p>
-                {profile && profile.birthDay ? (
+                {profile ? (
                 <Fragment>    
             <DashLinks/>
                 </Fragment>

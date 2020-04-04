@@ -1,4 +1,4 @@
 node_modules/
-config/default.json
+config/
 'npm-debug.log' 
 client-side/node_modules/

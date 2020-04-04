@@ -16,12 +16,12 @@ const Navbar = ({auth: { isAuthenticated, loading}, logout}) => {
                 <span className='hide-sm'> Home Page</span>
                 </Link>
            </li>
-           <li>
+           {/* <li>
                 <Link to='/saleingPage'>
                 <i className="fas fa-dollar-sign"/>
                 <span className='hide-sm'> Buy/Sell</span>
                 </Link>
-           </li>
+           </li> */}
             <li>
                 <Link to='/posts'>
                 <i className='fas fa-newspaper'></i>

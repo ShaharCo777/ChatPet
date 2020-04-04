@@ -69,8 +69,6 @@ router.post(
         sex,
         type,
         race,
-        adoptionDate,
-        birthDate,
         traind,
         descreption,
         cost
@@ -78,9 +76,11 @@ router.post(
       
       const user = req.user.id
       const profileImage = tempImage.tempPetImage
+      const birthDate = new Date(req.body.birthDate)
+      const adoptionDate = new Date(req.body.adoptionDate)
 
       try {
-        let pet = new Pet({ 
+        const pet = new Pet({ 
             user,
             profileImage,
             name,
@@ -145,8 +145,8 @@ router.put(
       pet.traind = traind
       pet.type = type
       pet.race = race
-      pet.adoptionDate = adoptionDate
-      pet.birthDate =birthDate
+      pet.adoptionDate = new Date(adoptionDate)
+      pet.birthDate = new Date(birthDate)
       pet.descreption = descreption
 
      await pet.save()

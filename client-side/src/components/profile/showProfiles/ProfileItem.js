@@ -12,7 +12,7 @@ const ProfileItem = ({
             name,
             avatar
         }, 
-        location,        
+        location   
     }
 }) => {
     useEffect(() => {

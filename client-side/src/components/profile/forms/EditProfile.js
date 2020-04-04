@@ -21,6 +21,7 @@ const EditProfile = ({
         when:'',
         how:'',
         what:'',
+        birthDate:'',
         favePet:'',
         otherProfiles: false,
         foroms:false,
@@ -42,14 +43,11 @@ const EditProfile = ({
         getUserProfile()
         setFormData({
             genral: loading ? '' : profile.genral,
+            birthDate: loading ? '' : profile.birthDate,
 
             contry: loading ? '' : profile.location.contry,
             city: loading || !profile.location ? '' : profile.location.city,
             street: loading || !profile.location ? '' : profile.location.street,
-
-            day: loading ? '' : profile.birthDay.day,
-            month: loading ? '' : profile.birthDay.month,
-            year: loading ? '' : profile.birthDay.year,
 
             when: loading || !profile.loveToPet ? '' : profile.loveToPet.when,
             how:loading || !profile.loveToPet ? '' : profile.loveToPet.how,
@@ -72,6 +70,7 @@ const EditProfile = ({
           contry,
           city,
           street,
+          birthDate,
           when,
           how,
           what,
